@@ -29,7 +29,14 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. An equation container on a 375px viewport scrolls horizontally without breaking the page layout
   4. Body text appears as off-white on dark gray (no pure white on pure black anywhere in the palette)
   5. Fonts (display, body, monospace) load with preload hints and the page is usable during font loading
-**Plans**: TBD
+**Plans**: 4 plans
+
+Plans:
+- [ ] 01-01-PLAN.md -- Astro 6 project scaffolding with Tailwind v4 design tokens, KaTeX CSS, and font config
+- [ ] 01-02-PLAN.md -- Layout and structural UI components (BaseLayout, Header, Footer, Section)
+- [ ] 01-03-PLAN.md -- Math rendering components and equation data (Equation, InlineMath, equations.ts)
+- [ ] 01-04-PLAN.md -- Demo index page integration and visual verification
+
 **UI hint**: yes
 
 ### Phase 2: Content Sections
@@ -75,7 +82,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation | 0/0 | Not started | - |
+| 1. Foundation | 0/4 | Planning complete | - |
 | 2. Content Sections | 0/0 | Not started | - |
 | 3. Visual Polish & Animation | 0/0 | Not started | - |
 | 4. Deploy & Verify | 0/0 | Not started | - |
