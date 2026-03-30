@@ -9,11 +9,11 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Foundation
 
-- [ ] **FOUN-01**: Site builds as static HTML with zero client-side JS for content rendering
+- [x] **FOUN-01**: Site builds as static HTML with zero client-side JS for content rendering
 - [ ] **FOUN-02**: Mathematical equations render at build time via KaTeX (no client-side math processing)
 - [ ] **FOUN-03**: Equation containers handle mobile overflow without layout breakage (overflow-x: auto, overflow-y: hidden)
-- [ ] **FOUN-04**: Dark color palette avoids halation (off-white on dark gray, no pure white on pure black)
-- [ ] **FOUN-05**: Typography system loaded with font preloading (display, body, monospace)
+- [x] **FOUN-04**: Dark color palette avoids halation (off-white on dark gray, no pure white on pure black)
+- [x] **FOUN-05**: Typography system loaded with font preloading (display, body, monospace)
 - [ ] **FOUN-06**: Responsive layout works on mobile (375px) through desktop (1440px+)
 
 ### Content
@@ -79,11 +79,11 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| FOUN-01 | Phase 1 | Pending |
+| FOUN-01 | Phase 1 | Complete |
 | FOUN-02 | Phase 1 | Pending |
 | FOUN-03 | Phase 1 | Pending |
-| FOUN-04 | Phase 1 | Pending |
-| FOUN-05 | Phase 1 | Pending |
+| FOUN-04 | Phase 1 | Complete |
+| FOUN-05 | Phase 1 | Complete |
 | FOUN-06 | Phase 1 | Pending |
 | CONT-01 | Phase 2 | Pending |
 | CONT-02 | Phase 2 | Pending |
