@@ -1,0 +1,22 @@
+---
+import katex from 'katex';
+
+interface Props {
+  latex: string;
+  ariaLabel?: string;
+}
+
+const { latex, ariaLabel } = Astro.props;
+const html = katex.renderToString(latex, {
+  displayMode: false,
+  throwOnError: false,
+  output: 'htmlAndMathml',
+});
+---
+
+<span
+  class="inline-math"
+  role="math"
+  aria-label={ariaLabel}
+  set:html={html}
+/>
