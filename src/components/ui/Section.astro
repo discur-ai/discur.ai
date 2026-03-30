@@ -1,0 +1,20 @@
+---
+interface Props {
+  id?: string;
+  class?: string;
+  fullWidth?: boolean;
+}
+
+const { id, class: className, fullWidth = false } = Astro.props;
+---
+
+<section
+  id={id}
+  class:list={[
+    'py-section px-4 sm:px-6 lg:px-8',
+    !fullWidth && 'mx-auto max-w-4xl',
+    className,
+  ]}
+>
+  <slot />
+</section>

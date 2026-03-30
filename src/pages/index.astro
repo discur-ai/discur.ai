@@ -1,14 +1,105 @@
 ---
-import '../styles/global.css';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Section from '../components/ui/Section.astro';
+import Equation from '../components/math/Equation.astro';
+import InlineMath from '../components/math/InlineMath.astro';
+import {
+  ASSOCIATOR,
+  ASSOCIATOR_NORM_S7,
+  COMPOSITION_ERROR,
+} from '../data/equations';
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Discur</title>
-  </head>
-  <body>
-    <p>Discur</p>
-  </body>
-</html>
+<BaseLayout>
+  <!-- Hero placeholder -->
+  <Section id="hero" class="pt-32">
+    <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl text-glyph tracking-wide">
+      Self-organizing memory from octonionic algebra
+    </h1>
+    <p class="mt-6 text-lg sm:text-xl text-chalk-muted max-w-2xl">
+      The octonionic trie routes, stores, and self-monitors using the non-associative structure of the octonions.
+    </p>
+  </Section>
+
+  <!-- Math rendering demo -->
+  <Section id="math-demo">
+    <h2 class="font-display text-2xl sm:text-3xl text-sigil mb-8">
+      Mathematical Foundation
+    </h2>
+    <p class="text-chalk mb-6">
+      The associator <InlineMath latex="[a,b,c]" ariaLabel="associator of a, b, c" /> measures the failure of associativity in the octonions.
+    </p>
+    <Equation
+      latex={ASSOCIATOR}
+      label="1"
+      ariaLabel="Associator definition: bracket a, b, c equals a b times c minus a times b c"
+    />
+    <p class="text-chalk mb-6">
+      The expected associator norm on the unit sphere has a remarkable closed form:
+    </p>
+    <Equation
+      latex={ASSOCIATOR_NORM_S7}
+      label="2"
+      ariaLabel="Expected associator norm on S7 equals 147456 over 42875 pi"
+    />
+    <p class="text-chalk mb-6">
+      Composition errors are bounded by:
+    </p>
+    <Equation
+      latex={COMPOSITION_ERROR}
+      label="3"
+      ariaLabel="Composition error bound epsilon of d"
+    />
+  </Section>
+
+  <!-- Typography demo -->
+  <Section id="typography-demo">
+    <h2 class="font-display text-2xl sm:text-3xl text-sigil mb-8">
+      Typography System
+    </h2>
+    <p class="text-chalk mb-4">
+      Body text in Cormorant Garamond -- warm, scholarly, readable at length.
+    </p>
+    <p class="font-display text-glyph text-xl mb-4">
+      Display headings in Cinzel -- classical authority.
+    </p>
+    <p class="font-mono text-chalk-muted mb-4">
+      Code and notation in JetBrains Mono -- technical clarity.
+    </p>
+    <p class="text-sigil mb-4">
+      Gold accent text for emphasis and interactive elements.
+    </p>
+    <p class="text-arcanum mb-4">
+      Violet accent for mathematical notation highlighting.
+    </p>
+  </Section>
+
+  <!-- Color palette demo -->
+  <Section id="palette-demo">
+    <h2 class="font-display text-2xl sm:text-3xl text-sigil mb-8">
+      Color Palette
+    </h2>
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+      <div class="rounded-lg p-4 bg-void border border-sigil-dim/30">
+        <span class="text-xs font-mono text-chalk-muted">void</span>
+        <span class="block text-xs font-mono text-chalk-muted">#0A0A0F</span>
+      </div>
+      <div class="rounded-lg p-4 bg-obsidian border border-sigil-dim/30">
+        <span class="text-xs font-mono text-chalk-muted">obsidian</span>
+        <span class="block text-xs font-mono text-chalk-muted">#111116</span>
+      </div>
+      <div class="rounded-lg p-4 bg-onyx border border-sigil-dim/30">
+        <span class="text-xs font-mono text-chalk-muted">onyx</span>
+        <span class="block text-xs font-mono text-chalk-muted">#1A1A22</span>
+      </div>
+      <div class="rounded-lg p-4 bg-void border border-sigil-dim/30">
+        <span class="text-xs font-mono text-sigil">sigil</span>
+        <span class="block text-xs font-mono text-sigil">#C4A35A</span>
+      </div>
+      <div class="rounded-lg p-4 bg-void border border-sigil-dim/30">
+        <span class="text-xs font-mono text-arcanum">arcanum</span>
+        <span class="block text-xs font-mono text-arcanum">#6B4C9A</span>
+      </div>
+    </div>
+  </Section>
+</BaseLayout>
