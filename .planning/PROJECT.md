@@ -12,7 +12,11 @@ Clearly communicate what the octonionic trie is and why it matters, through the 
 
 ### Validated
 
-(None yet — ship to validate)
+- ✓ Static site builds with zero client-side JS for content — Phase 1
+- ✓ Build-time KaTeX math rendering — Phase 1
+- ✓ Dark color palette avoids halation — Phase 1
+- ✓ Typography system with font preloading — Phase 1
+- ✓ Responsive equation containers — Phase 1
 
 ### Active
 
@@ -93,4 +97,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-03-30 after initialization*
+*Last updated: 2026-03-30 after Phase 1 completion*
