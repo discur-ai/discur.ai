@@ -1,0 +1,31 @@
+---
+import katex from 'katex';
+
+interface Props {
+  latex: string;
+  label?: string;
+  ariaLabel?: string;
+}
+
+const { latex, label, ariaLabel } = Astro.props;
+const html = katex.renderToString(latex, {
+  displayMode: true,
+  throwOnError: false,
+  output: 'htmlAndMathml',
+});
+---
+
+<figure
+  class="equation-container my-8 flex items-center justify-between"
+  role="math"
+  aria-label={ariaLabel}
+>
+  <div class="equation-scroll overflow-x-auto overflow-y-hidden py-2 max-w-full">
+    <Fragment set:html={html} />
+  </div>
+  {label && (
+    <figcaption class="equation-label ml-4 shrink-0 font-mono text-sm text-sigil">
+      ({label})
+    </figcaption>
+  )}
+</figure>
