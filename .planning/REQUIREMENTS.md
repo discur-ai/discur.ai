@@ -14,7 +14,7 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **FOUN-03**: Equation containers handle mobile overflow without layout breakage (overflow-x: auto, overflow-y: hidden)
 - [x] **FOUN-04**: Dark color palette avoids halation (off-white on dark gray, no pure white on pure black)
 - [x] **FOUN-05**: Typography system loaded with font preloading (display, body, monospace)
-- [ ] **FOUN-06**: Responsive layout works on mobile (375px) through desktop (1440px+)
+- [x] **FOUN-06**: Responsive layout works on mobile (375px) through desktop (1440px+)
 
 ### Content
 
@@ -84,7 +84,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | FOUN-03 | Phase 1 | Complete |
 | FOUN-04 | Phase 1 | Complete |
 | FOUN-05 | Phase 1 | Complete |
-| FOUN-06 | Phase 1 | Pending |
+| FOUN-06 | Phase 1 | Complete |
 | CONT-01 | Phase 2 | Pending |
 | CONT-02 | Phase 2 | Pending |
 | CONT-03 | Phase 2 | Pending |

@@ -35,7 +35,7 @@ Plans:
 - [x] 01-01-PLAN.md -- Astro 6 project scaffolding with Tailwind v4 design tokens, KaTeX CSS, and font config
 - [ ] 01-02-PLAN.md -- Layout and structural UI components (BaseLayout, Header, Footer, Section)
 - [x] 01-03-PLAN.md -- Math rendering components and equation data (Equation, InlineMath, equations.ts)
-- [ ] 01-04-PLAN.md -- Demo index page integration and visual verification
+- [x] 01-04-PLAN.md -- Demo index page integration and visual verification
 
 **UI hint**: yes
 
