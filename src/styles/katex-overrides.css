@@ -1,0 +1,16 @@
+.katex {
+  color: var(--color-chalk);
+  font-size: 1.1em;
+}
+
+.katex-display {
+  color: var(--color-glyph);
+}
+
+.katex .mord,
+.katex .mrel,
+.katex .mbin,
+.katex .mopen,
+.katex .mclose {
+  color: inherit;
+}
