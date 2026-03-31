@@ -1,0 +1,47 @@
+---
+import Section from '../ui/Section.astro';
+import Equation from '../math/Equation.astro';
+import InlineMath from '../math/InlineMath.astro';
+import TrieStructure from '../diagrams/TrieStructure.astro';
+import { ASSOCIATOR } from '../../data/equations';
+---
+
+<Section id="architecture" class="border-t border-sigil-dim/20">
+  <h2 class="font-display text-2xl sm:text-3xl text-sigil mb-12 tracking-wider uppercase">
+    Architecture
+  </h2>
+
+  <p class="text-chalk leading-relaxed mb-6">
+    The octonions are an eight-dimensional number system extending the quaternions. Like the quaternions, they are non-commutative. Unlike the quaternions, they are also non-associative: the expression (ab)c does not always equal a(bc). This failure of associativity, far from being a deficiency, provides the octonionic trie with its core computational signal.
+  </p>
+
+  <p class="text-chalk leading-relaxed mb-6">
+    The octonions contain exactly seven quaternionic subalgebras, each a four-dimensional subspace where multiplication is associative. These subalgebras are indexed by the lines of the Fano plane, a finite projective geometry with seven points and seven lines. Each imaginary basis unit belongs to exactly three subalgebras, creating an overlapping structure that the trie uses as its routing channels.
+  </p>
+
+  <p class="text-chalk leading-relaxed mb-6">
+    The associator is the mathematical object at the center of the octonionic trie. For three octonions a, b, and c, it measures how far their product deviates from associativity:
+  </p>
+
+  <Equation latex={ASSOCIATOR} label="1" ariaLabel="Associator definition: bracket a, b, c equals the quantity a b times c minus a times b c" />
+
+  <p class="text-chalk leading-relaxed mb-6">
+    The associator vanishes when all three arguments lie in a common quaternionic subalgebra. It is nonzero precisely when the triple spans multiple subalgebras. For unit octonions, the associator norm is bounded between 0 and 2, with an expected value of approximately 1.09 for uniformly random inputs on the 7-sphere.
+  </p>
+
+  <p class="text-chalk leading-relaxed mb-6">
+    In the trie, the associator answers a routing question: given a new input x, an existing child c, and their parent node n, does x belong in the same branch as c? The answer is graded, not binary.
+  </p>
+
+  <p class="text-chalk leading-relaxed mb-6">
+    A small associator norm indicates algebraic compatibility: x and c share a subalgebra in the context of n, and x is routed to c for composition. A large norm across all children signals novelty: x is algebraically incompatible with every existing branch and triggers the creation of a new node. Intermediate values represent partial compatibility, where the composition proceeds but the consistency check examines whether the update destabilizes prior predictions.
+  </p>
+
+  <p class="text-chalk leading-relaxed mb-6">
+    The resulting structure is a dynamically growing tree. Each node stores a single octonion. Edges are labeled with the quaternionic subalgebra that the child most strongly activates. The branching factor is bounded by seven (the number of Fano plane lines), and the depth is limited by composition error accumulation.
+  </p>
+
+  <div class="mt-12 mx-auto max-w-[800px] px-4">
+    <TrieStructure class="w-full" />
+  </div>
+</Section>
