@@ -7,17 +7,26 @@ import Invariants from '../components/sections/Invariants.astro';
 import Results from '../components/sections/Results.astro';
 import Comparison from '../components/sections/Comparison.astro';
 import Contact from '../components/sections/Contact.astro';
+import SectionDivider from '../components/ui/SectionDivider.astro';
+import ConstellationBackground from '../components/ui/ConstellationBackground.astro';
 ---
 
 <BaseLayout
   title="Discur — Self-Organizing Memory from Octonionic Algebra"
   description="The octonionic trie is a self-organizing hierarchical memory that replaces gradient descent with algebraic operations derived from the octonions."
 >
+  <ConstellationBackground />
   <Hero />
+  <SectionDivider />
   <Mechanism />
+  <SectionDivider />
   <Architecture />
+  <SectionDivider />
   <Invariants />
+  <SectionDivider />
   <Results />
+  <SectionDivider />
   <Comparison />
+  <SectionDivider />
   <Contact />
 </BaseLayout>
