@@ -1,0 +1,68 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<svg
+  viewBox="0 0 400 360"
+  xmlns="http://www.w3.org/2000/svg"
+  class:list={[className]}
+  preserveAspectRatio="xMidYMid meet"
+  role="img"
+  aria-label="Fano plane diagram showing the seven quaternionic subalgebras of the octonions"
+>
+  <defs>
+    <filter id="fano-glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="4" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" result="coloredBlur"
+        values="0.77 0 0 0 0
+                0.64 0 0 0 0
+                0.35 0 0 0 0
+                0    0 0 0.6 0"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Line 1: P1-P2 (left side) -->
+  <line x1="200" y1="40" x2="62" y2="280" stroke="#D4AF37" stroke-width="1.5" opacity="0.85"/>
+
+  <!-- Line 2: P2-P3 (bottom side) -->
+  <line x1="62" y1="280" x2="338" y2="280" stroke="#C49B30" stroke-width="1.5" opacity="0.85"/>
+
+  <!-- Line 3: P3-P1 (right side) -->
+  <line x1="338" y1="280" x2="200" y2="40" stroke="#B8892A" stroke-width="1.5" opacity="0.85"/>
+
+  <!-- Line 4: P1-P6 (median from top) -->
+  <line x1="200" y1="40" x2="200" y2="280" stroke="#A87424" stroke-width="1.5" opacity="0.85"/>
+
+  <!-- Line 5: P2-P5 (median from bottom-left) -->
+  <line x1="62" y1="280" x2="269" y2="160" stroke="#DAC060" stroke-width="1.5" opacity="0.85"/>
+
+  <!-- Line 6: P3-P4 (median from bottom-right) -->
+  <line x1="338" y1="280" x2="131" y2="160" stroke="#E8D088" stroke-width="1.5" opacity="0.85"/>
+
+  <!-- Line 7: Inscribed circle through P4(131,160), P5(269,160), P6(200,280) -->
+  <circle cx="200" cy="200" r="80" stroke="#8B6914" stroke-width="1.5" opacity="0.85" fill="none"/>
+
+  <!-- 7 node circles with glow filter -->
+  <!-- P1: top vertex -->
+  <circle cx="200" cy="40" r="8" fill="#C4A35A" filter="url(#fano-glow)"/>
+  <!-- P2: bottom-left vertex -->
+  <circle cx="62" cy="280" r="8" fill="#C4A35A" filter="url(#fano-glow)"/>
+  <!-- P3: bottom-right vertex -->
+  <circle cx="338" cy="280" r="8" fill="#C4A35A" filter="url(#fano-glow)"/>
+  <!-- P4: left edge midpoint -->
+  <circle cx="131" cy="160" r="8" fill="#C4A35A" filter="url(#fano-glow)"/>
+  <!-- P5: right edge midpoint -->
+  <circle cx="269" cy="160" r="8" fill="#C4A35A" filter="url(#fano-glow)"/>
+  <!-- P6: bottom edge midpoint -->
+  <circle cx="200" cy="280" r="8" fill="#C4A35A" filter="url(#fano-glow)"/>
+  <!-- P7: centroid -->
+  <circle cx="200" cy="193" r="8" fill="#C4A35A" filter="url(#fano-glow)"/>
+</svg>
