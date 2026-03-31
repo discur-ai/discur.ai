@@ -18,7 +18,7 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Content
 
-- [ ] **CONT-01**: Hero section states what Discur builds in one clear sentence
+- [x] **CONT-01**: Hero section states what Discur builds in one clear sentence
 - [x] **CONT-02**: Core technology section explains the octonionic trie with rendered equations ([a,b,c] = (ab)c - a(bc), composition error bound, associator norm)
 - [ ] **CONT-03**: Five mechanisms section presents routing, novelty detection, content update, consistency verification, and structural health as consequences of octonionic algebra
 - [x] **CONT-04**: Fano plane diagram rendered as SVG with labeled points and color-coded subalgebras
@@ -85,7 +85,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | FOUN-04 | Phase 1 | Complete |
 | FOUN-05 | Phase 1 | Complete |
 | FOUN-06 | Phase 1 | Complete |
-| CONT-01 | Phase 2 | Pending |
+| CONT-01 | Phase 2 | Complete |
 | CONT-02 | Phase 2 | Complete |
 | CONT-03 | Phase 2 | Pending |
 | CONT-04 | Phase 2 | Complete |
