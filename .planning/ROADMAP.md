@@ -69,7 +69,13 @@ Plans:
   2. Sections reveal on scroll via GSAP-driven animations that add visual rhythm without delaying content access
   3. The Fano plane diagram animates on scroll (draw-on effect or subalgebra highlighting sequence)
   4. The page renders all content and is fully navigable with JavaScript disabled (progressive enhancement)
-**Plans**: TBD
+**Plans**: 3 plans
+
+Plans:
+- [ ] 03-01-PLAN.md -- Progressive enhancement foundation and decorative components (SectionDivider, ConstellationBackground, .js-animate CSS)
+- [ ] 03-02-PLAN.md -- Animation data hooks on SVG diagrams and all section components
+- [ ] 03-03-PLAN.md -- GSAP installation, AnimationScript orchestration, and page assembly with decorative elements
+
 **UI hint**: yes
 
 ### Phase 4: Deploy & Verify
@@ -92,5 +98,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 |-------|----------------|--------|-----------|
 | 1. Foundation | 0/4 | Planning complete | - |
 | 2. Content Sections | 0/5 | Planning complete | - |
-| 3. Visual Polish & Animation | 0/0 | Not started | - |
+| 3. Visual Polish & Animation | 0/3 | Planning complete | - |
 | 4. Deploy & Verify | 0/0 | Not started | - |
