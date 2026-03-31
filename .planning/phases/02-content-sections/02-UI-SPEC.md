@@ -51,16 +51,17 @@ Source: global.css `--spacing-section`, Section.astro padding classes, existing 
 
 ## Typography
 
+Base font sizes: 4 (14px, 16px, 24px, 36px). Responsive breakpoint variants (e.g. `sm:text-5xl`, `lg:text-6xl`) are scaling of the 36px base entry, not additional design sizes.
+
 | Role | Font | Size | Weight | Line Height | Tailwind Classes |
 |------|------|------|--------|-------------|-----------------|
 | Body | Cormorant Garamond | 16px (1rem) | 400 | 1.6 | `text-base text-chalk` |
-| Body large | Cormorant Garamond | 18px (1.125rem) / 20px (1.25rem) | 400 | 1.5 | `text-lg sm:text-xl text-chalk-muted` |
-| Section heading | Cinzel | 24px / 30px | 400 | 1.2 | `font-display text-2xl sm:text-3xl text-sigil` |
-| Hero heading | Cinzel | 36px / 48px / 60px | 400 | 1.1 | `font-display text-4xl sm:text-5xl lg:text-6xl text-glyph` |
+| Section heading | Cinzel | 24px / responsive | 400 | 1.2 | `font-display text-2xl sm:text-3xl text-sigil` |
+| Hero heading | Cinzel | 36px / responsive | 400 | 1.1 | `font-display text-4xl sm:text-5xl lg:text-6xl text-glyph` |
 | Equation label | JetBrains Mono | 14px (0.875rem) | 400 | 1.4 | `font-mono text-sm text-sigil` |
 | Table header | Cinzel | 14px (0.875rem) | 400 | 1.4 | `font-display text-sm text-chalk-muted` |
 | Table cell | Cormorant Garamond | 14px (0.875rem) | 400 | 1.5 | `text-sm text-chalk` |
-| Result number | Cinzel | 30px (1.875rem) | 400 | 1.2 | `font-display text-3xl text-glyph` |
+| Result number | Cinzel | 24px (1.5rem) | 400 | 1.2 | `font-display text-2xl text-glyph` |
 | Result label | Cinzel | 14px (0.875rem) | 400 | 1.4 | `font-display text-sm text-sigil tracking-wider uppercase` |
 | Footer/caption | Cormorant Garamond | 14px (0.875rem) | 400 | 1.5 | `text-sm text-chalk-muted` |
 
@@ -168,6 +169,8 @@ The page is a single vertical scroll. Sections appear in this order per CONTEXT.
 | 7 | Contact | `Contact` | `id="contact"` | Paper link + email + GitHub |
 
 ### Hero Layout
+
+**Primary focal point:** The hero headline text in the left column. The `text-glyph` color (#E8D5A3) at 36px+ Cinzel display weight creates the dominant visual anchor; the Fano plane SVG in the right column serves as a supporting visual element, not the primary focus.
 
 ```
 Desktop (>= 640px):               Mobile (< 640px):
@@ -340,7 +343,7 @@ Using Tailwind's default breakpoints (established in Phase 1):
 | Breakpoint | Width | Key Layout Changes |
 |------------|-------|-------------------|
 | Default (mobile) | < 640px | Single column. Hero stacks vertically. Results cards stack. Tables scroll horizontally. Fano plane at 280px max. |
-| `sm` | >= 640px | Hero side-by-side (text/Fano). Results cards 2-column grid. Body text scales to `text-xl`. |
+| `sm` | >= 640px | Hero side-by-side (text/Fano). Results cards 2-column grid. Section heading scales to `text-3xl`. |
 | `lg` | >= 1024px | Hero heading scales to `text-6xl`. Section padding increases to `px-8`. |
 
 Content max-width: `max-w-4xl` (896px) for all text sections. Trie diagram uses `fullWidth` with `max-w-[800px] mx-auto`.
