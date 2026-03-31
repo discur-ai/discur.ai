@@ -35,7 +35,7 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **VISL-02**: Section transitions use scroll-triggered reveals (GSAP)
 - [x] **VISL-03**: Fano plane diagram animates on scroll (draw-on effect or subalgebra highlighting)
 - [ ] **VISL-04**: Sacred geometry or mathematical dividers between sections (max 2 decorative non-mathematical elements)
-- [ ] **VISL-05**: Page functions fully without JavaScript (progressive enhancement)
+- [x] **VISL-05**: Page functions fully without JavaScript (progressive enhancement)
 
 ### Deployment
 
@@ -99,7 +99,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | VISL-02 | Phase 3 | Complete |
 | VISL-03 | Phase 3 | Complete |
 | VISL-04 | Phase 3 | Pending |
-| VISL-05 | Phase 3 | Pending |
+| VISL-05 | Phase 3 | Complete |
 | DEPL-01 | Phase 4 | Pending |
 | DEPL-02 | Phase 4 | Pending |
 | DEPL-03 | Phase 4 | Pending |

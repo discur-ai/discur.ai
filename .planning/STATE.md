@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: verifying
-stopped_at: Completed 03-02-PLAN.md
-last_updated: "2026-03-31T20:21:42.095Z"
+stopped_at: Completed 03-03-PLAN.md
+last_updated: "2026-03-31T20:29:13.895Z"
 last_activity: 2026-03-31
 progress:
   total_phases: 4
-  completed_phases: 1
+  completed_phases: 2
   total_plans: 12
-  completed_plans: 9
+  completed_plans: 11
   percent: 0
 ---
 
@@ -59,6 +59,7 @@ Progress: [░░░░░░░░░░] 0%
 | Phase 02 P04 | 3min | 2 tasks | 4 files |
 | Phase 02 P05 | 2min | 2 tasks | 2 files |
 | Phase 03 P02 | 14min | 2 tasks | 10 files |
+| Phase 03 P03 | 2min | 2 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -79,6 +80,8 @@ Recent decisions affecting current work:
 - [Phase 02]: Comparison table renders dynamically from ARCHITECTURE_NAMES/COMPARISON_ROWS data arrays
 - [Phase 03]: Hero uses data-animate=hero on grid wrapper div (not Section) for page-load animation, distinct from scroll-triggered section-reveal
 - [Phase 03]: Architecture, Results, Comparison get unique dataAnimate values for component-specific GSAP animations (trie draw, table row stagger)
+- [Phase 03]: GSAP script uses standard Astro script (Vite-bundled) not is:inline, for tree-shaking and module resolution
+- [Phase 03]: DrawSVGPlugin used for Fano line draw-on (free since GSAP 3.13+ Webflow acquisition)
 
 ### Pending Todos
 
@@ -90,6 +93,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-31T20:21:42.091Z
-Stopped at: Completed 03-02-PLAN.md
+Last session: 2026-03-31T20:29:13.891Z
+Stopped at: Completed 03-03-PLAN.md
 Resume file: None
