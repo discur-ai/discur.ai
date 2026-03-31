@@ -1,0 +1,285 @@
+---
+// AnimationScript.astro -- Client-side GSAP animation orchestration
+// All animations are progressive enhancement: content is visible without JS.
+// This script runs after DOM parse (Vite bundles as deferred module).
+---
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import { DrawSVGPlugin } from "gsap/DrawSVGPlugin";
+
+  gsap.registerPlugin(ScrollTrigger, DrawSVGPlugin);
+
+  // Wrap ALL animations in matchMedia for reduced-motion support.
+  // If user prefers reduced motion, none of this code runs.
+  // gsap.matchMedia auto-reverts everything if preference changes.
+  const mm = gsap.matchMedia();
+
+  mm.add("(prefers-reduced-motion: no-preference)", () => {
+
+    // ========================================
+    // 1. HERO LOAD ANIMATION (D-05, D-08, D-09, D-10, D-11)
+    // ========================================
+    // Plays once on page load. Not scroll-triggered.
+    // Sequence: headline > paragraph > Fano lines draw > nodes scale > subalgebra glow
+
+    const heroTl = gsap.timeline({ delay: 0.1 });
+
+    // Step 1: Headline fade up (0.5s, power2.out)
+    heroTl.to("[data-hero-headline]", {
+      opacity: 1,
+      y: 0,
+      duration: 0.5,
+      ease: "power2.out",
+    });
+
+    // Step 2: Paragraph fade up (0.5s, overlaps headline by 0.2s)
+    heroTl.to("[data-hero-paragraph]", {
+      opacity: 1,
+      y: 0,
+      duration: 0.5,
+      ease: "power2.out",
+    }, "-=0.2");
+
+    // Step 3: Fano plane lines draw on via DrawSVGPlugin (1.2s total, stagger 0.1s)
+    // DrawSVGPlugin uses pathLength="1" normalization set in Plan 02
+    const fanoLines = gsap.utils.toArray("[data-fano-line]");
+    if (fanoLines.length) {
+      gsap.set(fanoLines, { drawSVG: "0%" });
+      heroTl.to(fanoLines, {
+        drawSVG: "100%",
+        duration: 1.2,
+        ease: "power1.inOut",
+        stagger: 0.1,
+      }, "+=0.3");
+    }
+
+    // Step 4: Fano nodes scale in (0.4s each, stagger 0.08s, back.out overshoot)
+    heroTl.to("[data-fano-node]", {
+      opacity: 1,
+      scale: 1,
+      duration: 0.4,
+      ease: "back.out(1.4)",
+      stagger: 0.08,
+    });
+
+    // Step 5: Subalgebra glow pulse (opacity pulse on lines: 0.85 > 1 > 0.85)
+    // Sequential, 0.15s gap between each line
+    heroTl.to("[data-fano-line]", {
+      opacity: 1,
+      duration: 0.15,
+      stagger: 0.15,
+      ease: "power1.inOut",
+    });
+    heroTl.to("[data-fano-line]", {
+      opacity: 0.85,
+      duration: 0.15,
+      stagger: 0.15,
+      ease: "power1.inOut",
+    });
+
+    // ========================================
+    // 2. SECTION SCROLL REVEALS (D-01, D-02, D-07)
+    // ========================================
+    // Each section independently triggered at top 70%.
+    // Plays once (once: true). No replay on scroll back.
+
+    gsap.utils.toArray('[data-animate="section-reveal"]').forEach((section) => {
+      gsap.to(section, {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: section,
+          start: "top 70%",
+          once: true,
+        },
+      });
+
+      // Equation stagger within this section (D-03)
+      const equations = section.querySelectorAll(".katex-display");
+      if (equations.length) {
+        gsap.to(equations, {
+          opacity: 1,
+          y: 0,
+          duration: 0.4,
+          ease: "power2.out",
+          stagger: 0.15,
+          scrollTrigger: {
+            trigger: section,
+            start: "top 70%",
+            once: true,
+          },
+          delay: 0.25,
+        });
+      }
+    });
+
+    // ========================================
+    // 3. ARCHITECTURE SECTION + TRIE ANIMATION (D-06, D-12, D-13)
+    // ========================================
+    // Triggered by ScrollTrigger when Architecture section enters viewport.
+    // Section reveals first, then trie nodes glow in hierarchical sequence.
+
+    const archSection = document.querySelector('[data-animate="architecture"]');
+    if (archSection) {
+      // Section reveal
+      gsap.to(archSection, {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: archSection,
+          start: "top 70%",
+          once: true,
+        },
+      });
+
+      // Equation stagger within Architecture
+      const archEquations = archSection.querySelectorAll(".katex-display");
+      if (archEquations.length) {
+        gsap.to(archEquations, {
+          opacity: 1,
+          y: 0,
+          duration: 0.4,
+          ease: "power2.out",
+          stagger: 0.15,
+          scrollTrigger: {
+            trigger: archSection,
+            start: "top 70%",
+            once: true,
+          },
+          delay: 0.25,
+        });
+      }
+
+      // Trie animation timeline
+      const trieTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: archSection,
+          start: "top 70%",
+          once: true,
+        },
+      });
+
+      // Step 1: Edges fade in (0.4s)
+      trieTl.to("[data-trie-edge]", {
+        opacity: 1,
+        duration: 0.4,
+        ease: "power2.out",
+      });
+
+      // Step 2: Root node (level 0) scales in (0.4s, 0.2s delay)
+      trieTl.to('[data-trie-node="level-0"]', {
+        opacity: 1,
+        scale: 1,
+        duration: 0.4,
+        ease: "back.out(1.4)",
+      }, "+=0.2");
+
+      // Step 3: Children (level 1) scale in (0.4s each, stagger 0.1s)
+      trieTl.to('[data-trie-node="level-1"]', {
+        opacity: 1,
+        scale: 1,
+        duration: 0.4,
+        ease: "back.out(1.4)",
+        stagger: 0.1,
+      }, "+=0.1");
+
+      // Step 4: Grandchildren (level 2) scale in (0.4s each, stagger 0.1s)
+      trieTl.to('[data-trie-node="level-2"]', {
+        opacity: 1,
+        scale: 1,
+        duration: 0.4,
+        ease: "back.out(1.4)",
+        stagger: 0.1,
+      }, "+=0.1");
+
+      // Step 5: Labels fade in (0.3s, follows last node)
+      trieTl.to("[data-trie-label]", {
+        opacity: 1,
+        duration: 0.3,
+        ease: "power2.out",
+        stagger: 0.05,
+      });
+    }
+
+    // ========================================
+    // 4. RESULTS TABLE ROW STAGGER (D-04)
+    // ========================================
+    const resultsSection = document.querySelector('[data-animate="results"]');
+    if (resultsSection) {
+      // Section reveal
+      gsap.to(resultsSection, {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: resultsSection,
+          start: "top 70%",
+          once: true,
+        },
+      });
+
+      // Row stagger (0.3s per row, 0.1s stagger, 0.2s delay after section)
+      const resultRows = resultsSection.querySelectorAll("[data-result-row]");
+      if (resultRows.length) {
+        gsap.to(resultRows, {
+          opacity: 1,
+          y: 0,
+          duration: 0.3,
+          ease: "power2.out",
+          stagger: 0.1,
+          scrollTrigger: {
+            trigger: resultsSection,
+            start: "top 70%",
+            once: true,
+          },
+          delay: 0.2,
+        });
+      }
+    }
+
+    // ========================================
+    // 5. COMPARISON TABLE ROW STAGGER (D-04)
+    // ========================================
+    const compSection = document.querySelector('[data-animate="comparison"]');
+    if (compSection) {
+      // Section reveal
+      gsap.to(compSection, {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: compSection,
+          start: "top 70%",
+          once: true,
+        },
+      });
+
+      // Row stagger
+      const compRows = compSection.querySelectorAll("[data-comparison-row]");
+      if (compRows.length) {
+        gsap.to(compRows, {
+          opacity: 1,
+          y: 0,
+          duration: 0.3,
+          ease: "power2.out",
+          stagger: 0.1,
+          scrollTrigger: {
+            trigger: compSection,
+            start: "top 70%",
+            once: true,
+          },
+          delay: 0.2,
+        });
+      }
+    }
+
+  }); // end matchMedia
+</script>
