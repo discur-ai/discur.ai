@@ -38,3 +38,48 @@ body {
   background-color: var(--color-sigil);
   color: var(--color-void);
 }
+
+/* Progressive enhancement: hide elements for animation only when JS is available */
+.js-animate [data-animate="section-reveal"] {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.js-animate [data-hero-headline],
+.js-animate [data-hero-paragraph] {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.js-animate [data-fano-node] {
+  opacity: 0;
+  transform: scale(0.5);
+}
+
+.js-animate [data-fano-line] {
+  opacity: 0.85;
+}
+
+.js-animate [data-trie-node] {
+  opacity: 0;
+  transform: scale(0.5);
+}
+
+.js-animate [data-trie-edge] {
+  opacity: 0.3;
+}
+
+.js-animate [data-trie-label] {
+  opacity: 0;
+}
+
+.js-animate [data-result-row],
+.js-animate [data-comparison-row] {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.js-animate .katex-display {
+  opacity: 0;
+  transform: translateY(15px);
+}
