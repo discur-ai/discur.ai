@@ -1,0 +1,45 @@
+---
+import Section from '../ui/Section.astro';
+import InlineMath from '../math/InlineMath.astro';
+---
+
+<Section id="mechanism" class="border-t border-sigil-dim/20">
+  <h2 class="font-display text-2xl sm:text-3xl text-sigil mb-12 tracking-wider uppercase">
+    Mechanism
+  </h2>
+
+  <div class="mb-10">
+    <h3 class="font-display text-lg text-sigil mb-3">Routing</h3>
+    <p class="text-chalk leading-relaxed">
+      Each node in the trie decomposes incoming data along the seven quaternionic subalgebras of the octonions, indexed by the Fano plane. The child whose subalgebra captures the strongest projection receives the input. Routing requires no learned parameters: the subalgebra structure is a property of octonionic multiplication itself.
+    </p>
+  </div>
+
+  <div class="mb-10">
+    <h3 class="font-display text-lg text-sigil mb-3">Novelty detection</h3>
+    <p class="text-chalk leading-relaxed">
+      The associator <InlineMath latex="[a,b,c] = (ab)c - a(bc)" ariaLabel="Associator: bracket a, b, c equals a b times c minus a times b c" /> measures whether a triple of octonions lies within a common quaternionic subalgebra. When an input produces small associator norms with existing children, it is algebraically compatible. When the norm is large for all children, the input represents genuinely novel structure and triggers a branching event.
+    </p>
+  </div>
+
+  <div class="mb-10">
+    <h3 class="font-display text-lg text-sigil mb-3">Content update</h3>
+    <p class="text-chalk leading-relaxed">
+      Nodes accumulate information through octonionic composition. The update rule composes the existing node content with new input via multiplication. Because octonionic multiplication is norm-preserving, sequential compositions neither explode nor vanish, and any composition can be reversed through algebraic inversion.
+    </p>
+  </div>
+
+  <div class="mb-10">
+    <h3 class="font-display text-lg text-sigil mb-3">Consistency verification</h3>
+    <p class="text-chalk leading-relaxed">
+      Before committing an update, the trie checks whether the change is consistent with prior predictions stored in the node's memory buffer. It computes the counterfactual: given the proposed update, how would past predictions have differed? If the discrepancy exceeds a threshold, the update is rejected and escalated to a branching decision. This reasoning is enabled by algebraic invertibility.
+    </p>
+  </div>
+
+  <div class="last:mb-0">
+    <h3 class="font-display text-lg text-sigil mb-3">Structural health</h3>
+    <p class="text-chalk leading-relaxed">
+      Five invariants derived from the algebra monitor the trie's structural integrity: composition error bounds limit depth, compression efficiency flags redundant subtrees, subalgebra cleanliness measures branch separation, prediction consistency tracks update stability, and associator health detects routing strain. These replace the role of loss functions in gradient-trained systems.
+    </p>
+  </div>
+</Section>

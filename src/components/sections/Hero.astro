@@ -1,0 +1,20 @@
+---
+import Section from '../ui/Section.astro';
+import FanoPlane from '../diagrams/FanoPlane.astro';
+---
+
+<Section id="hero" class="pt-32">
+  <div class="grid sm:grid-cols-[3fr_2fr] gap-8 sm:gap-12 items-center">
+    <div>
+      <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl text-glyph tracking-wide leading-tight">
+        A self-organizing memory that replaces gradient descent with octonionic algebra
+      </h1>
+      <p class="mt-6 text-lg text-chalk max-w-xl">
+        The octonionic trie is a tree whose nodes are individual octonions. It routes, stores, verifies, and restructures using five operations that emerge from a single algebraic substrate.
+      </p>
+    </div>
+    <div class="flex justify-center sm:justify-end">
+      <FanoPlane class="w-full max-w-[280px] sm:max-w-[400px]" />
+    </div>
+  </div>
+</Section>
