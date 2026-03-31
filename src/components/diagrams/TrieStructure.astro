@@ -1,0 +1,67 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<svg
+  viewBox="0 0 800 400"
+  xmlns="http://www.w3.org/2000/svg"
+  class:list={[className]}
+  preserveAspectRatio="xMidYMid meet"
+  role="img"
+  aria-label="Octonionic trie structure showing three levels of hierarchical memory nodes"
+>
+  <defs>
+    <filter id="trie-glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="4" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" result="coloredBlur"
+        values="0.77 0 0 0 0
+                0.64 0 0 0 0
+                0.35 0 0 0 0
+                0    0 0 0.6 0"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Edges (drawn first, behind labels and nodes) -->
+  <!-- o_root -> o_1 -->
+  <line x1="400" y1="60" x2="160" y2="190" stroke="#8A8680" stroke-width="1.5"/>
+  <!-- o_root -> o_2 -->
+  <line x1="400" y1="60" x2="400" y2="190" stroke="#8A8680" stroke-width="1.5"/>
+  <!-- o_root -> o_3 -->
+  <line x1="400" y1="60" x2="640" y2="190" stroke="#8A8680" stroke-width="1.5"/>
+  <!-- o_1 -> o_11 -->
+  <line x1="160" y1="190" x2="80" y2="330" stroke="#8A8680" stroke-width="1.5"/>
+  <!-- o_1 -> o_12 -->
+  <line x1="160" y1="190" x2="240" y2="330" stroke="#8A8680" stroke-width="1.5"/>
+  <!-- o_3 -> o_31 -->
+  <line x1="640" y1="190" x2="640" y2="330" stroke="#8A8680" stroke-width="1.5"/>
+
+  <!-- Edge labels (positioned at midpoints with offsets) -->
+  <text x="265" y="125" fill="#C4A35A" font-family="Cinzel, serif" font-size="14" text-anchor="middle">S&#x2081;</text>
+  <text x="415" y="125" fill="#C4A35A" font-family="Cinzel, serif" font-size="14" text-anchor="middle">S&#x2083;</text>
+  <text x="535" y="125" fill="#C4A35A" font-family="Cinzel, serif" font-size="14" text-anchor="middle">S&#x2086;</text>
+  <text x="105" y="260" fill="#C4A35A" font-family="Cinzel, serif" font-size="14" text-anchor="middle">S&#x2082;</text>
+  <text x="215" y="260" fill="#C4A35A" font-family="Cinzel, serif" font-size="14" text-anchor="middle">S&#x2084;</text>
+  <text x="655" y="260" fill="#C4A35A" font-family="Cinzel, serif" font-size="14" text-anchor="middle">S&#x2087;</text>
+
+  <!-- Node circles with glow filter -->
+  <!-- Level 0: root (radius 12) -->
+  <circle cx="400" cy="60" r="12" fill="#C4A35A" filter="url(#trie-glow)"/>
+
+  <!-- Level 1: children (radius 10) -->
+  <circle cx="160" cy="190" r="10" fill="#C4A35A" filter="url(#trie-glow)"/>
+  <circle cx="400" cy="190" r="10" fill="#C4A35A" filter="url(#trie-glow)"/>
+  <circle cx="640" cy="190" r="10" fill="#C4A35A" filter="url(#trie-glow)"/>
+
+  <!-- Level 2: grandchildren (radius 8) -->
+  <circle cx="80" cy="330" r="8" fill="#C4A35A" filter="url(#trie-glow)"/>
+  <circle cx="240" cy="330" r="8" fill="#C4A35A" filter="url(#trie-glow)"/>
+  <circle cx="640" cy="330" r="8" fill="#C4A35A" filter="url(#trie-glow)"/>
+</svg>
