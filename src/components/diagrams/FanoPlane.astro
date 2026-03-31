@@ -4,10 +4,35 @@ interface Props {
 }
 
 const { class: className } = Astro.props;
+
+// Fano plane geometry: equilateral triangle with vertices, edge midpoints, centroid.
+// All 7 points should lie correctly on the lines and inscribed circle.
+// Triangle vertices (equilateral, centered in viewBox)
+const cx = 200, cy = 190;
+const R = 150; // circumradius
+// Vertices at 90°, 210°, 330° (top, bottom-left, bottom-right)
+const P1 = { x: cx, y: cy - R }; // top
+const P2 = { x: cx - R * Math.cos(Math.PI/6), y: cy + R * Math.sin(Math.PI/6) }; // bottom-left
+const P3 = { x: cx + R * Math.cos(Math.PI/6), y: cy + R * Math.sin(Math.PI/6) }; // bottom-right
+
+// Edge midpoints
+const P4 = { x: (P1.x + P2.x) / 2, y: (P1.y + P2.y) / 2 }; // midpoint P1-P2 (left edge)
+const P5 = { x: (P1.x + P3.x) / 2, y: (P1.y + P3.y) / 2 }; // midpoint P1-P3 (right edge)
+const P6 = { x: (P2.x + P3.x) / 2, y: (P2.y + P3.y) / 2 }; // midpoint P2-P3 (bottom edge)
+
+// Centroid
+const P7 = { x: (P1.x + P2.x + P3.x) / 3, y: (P1.y + P2.y + P3.y) / 3 };
+
+// Inscribed circle through P4, P5, P6 (the medial triangle's circumcircle)
+// Center is the centroid, radius is distance from centroid to any midpoint
+const inscribedR = Math.sqrt((P7.x - P4.x) ** 2 + (P7.y - P4.y) ** 2);
+
+// Round for clean SVG
+const r = (v: number) => Math.round(v * 10) / 10;
 ---
 
 <svg
-  viewBox="0 0 400 360"
+  viewBox="0 0 400 380"
   xmlns="http://www.w3.org/2000/svg"
   class:list={[className]}
   preserveAspectRatio="xMidYMid meet"
@@ -29,40 +54,25 @@ const { class: className } = Astro.props;
     </filter>
   </defs>
 
-  <!-- Line 1: P1-P2 (left side) -->
-  <line x1="200" y1="40" x2="62" y2="280" stroke="#D4AF37" stroke-width="1.5" opacity="0.85" data-fano-line pathLength="1"/>
+  <!-- Triangle sides -->
+  <line x1={r(P1.x)} y1={r(P1.y)} x2={r(P2.x)} y2={r(P2.y)} stroke="#D4AF37" stroke-width="1.5" opacity="0.85" data-fano-line pathLength="1"/>
+  <line x1={r(P2.x)} y1={r(P2.y)} x2={r(P3.x)} y2={r(P3.y)} stroke="#C49B30" stroke-width="1.5" opacity="0.85" data-fano-line pathLength="1"/>
+  <line x1={r(P3.x)} y1={r(P3.y)} x2={r(P1.x)} y2={r(P1.y)} stroke="#B8892A" stroke-width="1.5" opacity="0.85" data-fano-line pathLength="1"/>
 
-  <!-- Line 2: P2-P3 (bottom side) -->
-  <line x1="62" y1="280" x2="338" y2="280" stroke="#C49B30" stroke-width="1.5" opacity="0.85" data-fano-line pathLength="1"/>
+  <!-- Medians (vertex to opposite midpoint, passing through centroid) -->
+  <line x1={r(P1.x)} y1={r(P1.y)} x2={r(P6.x)} y2={r(P6.y)} stroke="#A87424" stroke-width="1.5" opacity="0.85" data-fano-line pathLength="1"/>
+  <line x1={r(P2.x)} y1={r(P2.y)} x2={r(P5.x)} y2={r(P5.y)} stroke="#DAC060" stroke-width="1.5" opacity="0.85" data-fano-line pathLength="1"/>
+  <line x1={r(P3.x)} y1={r(P3.y)} x2={r(P4.x)} y2={r(P4.y)} stroke="#E8D088" stroke-width="1.5" opacity="0.85" data-fano-line pathLength="1"/>
 
-  <!-- Line 3: P3-P1 (right side) -->
-  <line x1="338" y1="280" x2="200" y2="40" stroke="#B8892A" stroke-width="1.5" opacity="0.85" data-fano-line pathLength="1"/>
-
-  <!-- Line 4: P1-P6 (median from top) -->
-  <line x1="200" y1="40" x2="200" y2="280" stroke="#A87424" stroke-width="1.5" opacity="0.85" data-fano-line pathLength="1"/>
-
-  <!-- Line 5: P2-P5 (median from bottom-left) -->
-  <line x1="62" y1="280" x2="269" y2="160" stroke="#DAC060" stroke-width="1.5" opacity="0.85" data-fano-line pathLength="1"/>
-
-  <!-- Line 6: P3-P4 (median from bottom-right) -->
-  <line x1="338" y1="280" x2="131" y2="160" stroke="#E8D088" stroke-width="1.5" opacity="0.85" data-fano-line pathLength="1"/>
-
-  <!-- Line 7: Inscribed circle through P4(131,160), P5(269,160), P6(200,280) -->
-  <circle cx="200" cy="200" r="80" stroke="#8B6914" stroke-width="1.5" opacity="0.85" fill="none" data-fano-line pathLength="1"/>
+  <!-- Inscribed circle through the three edge midpoints -->
+  <circle cx={r(P7.x)} cy={r(P7.y)} r={r(inscribedR)} stroke="#8B6914" stroke-width="1.5" opacity="0.85" fill="none" data-fano-line pathLength="1"/>
 
   <!-- 7 node circles with glow filter -->
-  <!-- P1: top vertex -->
-  <circle cx="200" cy="40" r="8" fill="#C4A35A" filter="url(#fano-glow)" data-fano-node/>
-  <!-- P2: bottom-left vertex -->
-  <circle cx="62" cy="280" r="8" fill="#C4A35A" filter="url(#fano-glow)" data-fano-node/>
-  <!-- P3: bottom-right vertex -->
-  <circle cx="338" cy="280" r="8" fill="#C4A35A" filter="url(#fano-glow)" data-fano-node/>
-  <!-- P4: left edge midpoint -->
-  <circle cx="131" cy="160" r="8" fill="#C4A35A" filter="url(#fano-glow)" data-fano-node/>
-  <!-- P5: right edge midpoint -->
-  <circle cx="269" cy="160" r="8" fill="#C4A35A" filter="url(#fano-glow)" data-fano-node/>
-  <!-- P6: bottom edge midpoint -->
-  <circle cx="200" cy="280" r="8" fill="#C4A35A" filter="url(#fano-glow)" data-fano-node/>
-  <!-- P7: centroid -->
-  <circle cx="200" cy="193" r="8" fill="#C4A35A" filter="url(#fano-glow)" data-fano-node/>
+  <circle cx={r(P1.x)} cy={r(P1.y)} r="7" fill="#D4AF37" filter="url(#fano-glow)" data-fano-node/>
+  <circle cx={r(P2.x)} cy={r(P2.y)} r="7" fill="#C49B30" filter="url(#fano-glow)" data-fano-node/>
+  <circle cx={r(P3.x)} cy={r(P3.y)} r="7" fill="#B8892A" filter="url(#fano-glow)" data-fano-node/>
+  <circle cx={r(P4.x)} cy={r(P4.y)} r="7" fill="#A87424" filter="url(#fano-glow)" data-fano-node/>
+  <circle cx={r(P5.x)} cy={r(P5.y)} r="7" fill="#DAC060" filter="url(#fano-glow)" data-fano-node/>
+  <circle cx={r(P6.x)} cy={r(P6.y)} r="7" fill="#E8D088" filter="url(#fano-glow)" data-fano-node/>
+  <circle cx={r(P7.x)} cy={r(P7.y)} r="7" fill="#C4A35A" filter="url(#fano-glow)" data-fano-node/>
 </svg>
