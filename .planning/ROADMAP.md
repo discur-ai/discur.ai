@@ -49,7 +49,15 @@ Plans:
   3. The five mechanisms (routing, novelty detection, content update, consistency verification, structural health) are each presented as consequences of octonionic algebra, not separate engineered components
   4. A Fano plane SVG diagram with labeled points and color-coded subalgebras is visible, and an octonionic trie structure diagram shows nodes, edges, and subalgebra labels
   5. Experimental results (95.2% MNIST, 0% catastrophic forgetting, 97.7% synthetic, 5x novelty contrast) appear with specific numbers, and a comparison table contrasts Oct-Trie against NTM/DNC, SDM, and HTM
-**Plans**: TBD
+**Plans**: 5 plans
+
+Plans:
+- [ ] 02-01-PLAN.md -- Fix equation constants and create results/comparison data files
+- [ ] 02-02-PLAN.md -- Hand-coded SVG diagrams (Fano plane sigil and octonionic trie structure)
+- [ ] 02-03-PLAN.md -- Hero, Mechanism, and Architecture section components with pre-written copy
+- [ ] 02-04-PLAN.md -- Invariants, Results, Comparison, and Contact section components with pre-written copy
+- [ ] 02-05-PLAN.md -- Assemble index.astro and update Footer with correct contact info
+
 **UI hint**: yes
 
 ### Phase 3: Visual Polish & Animation
@@ -83,6 +91,6 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation | 0/4 | Planning complete | - |
-| 2. Content Sections | 0/0 | Not started | - |
+| 2. Content Sections | 0/5 | Planning complete | - |
 | 3. Visual Polish & Animation | 0/0 | Not started | - |
 | 4. Deploy & Verify | 0/0 | Not started | - |
