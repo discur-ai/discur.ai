@@ -3,8 +3,8 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: verifying
-stopped_at: Completed 03-01-PLAN.md
-last_updated: "2026-03-31T20:23:40.994Z"
+stopped_at: Completed 03-02-PLAN.md
+last_updated: "2026-03-31T20:21:42.095Z"
 last_activity: 2026-03-31
 progress:
   total_phases: 4
@@ -58,7 +58,7 @@ Progress: [░░░░░░░░░░] 0%
 | Phase 02 P02 | 2min | 2 tasks | 2 files |
 | Phase 02 P04 | 3min | 2 tasks | 4 files |
 | Phase 02 P05 | 2min | 2 tasks | 2 files |
-| Phase 03 P01 | 16min | 2 tasks | 4 files |
+| Phase 03 P02 | 14min | 2 tasks | 10 files |
 
 ## Accumulated Context
 
@@ -77,8 +77,8 @@ Recent decisions affecting current work:
 - [Phase 02]: Filter IDs namespaced per SVG component (fano-glow, trie-glow) to avoid conflicts when both appear on same page
 - [Phase 02]: Results table uses text-glyph for slight emphasis at text-sm size (D-36 compliant, not oversized headlines)
 - [Phase 02]: Comparison table renders dynamically from ARCHITECTURE_NAMES/COMPARISON_ROWS data arrays
-- [Phase 03]: Progressive enhancement via .js-animate class on html element, added by inline head script before first paint
-- [Phase 03]: Constellation background at z-index 0, main content at z-index 1 for proper layering
+- [Phase 03]: Hero uses data-animate=hero on grid wrapper div (not Section) for page-load animation, distinct from scroll-triggered section-reveal
+- [Phase 03]: Architecture, Results, Comparison get unique dataAnimate values for component-specific GSAP animations (trie draw, table row stagger)
 
 ### Pending Todos
 
@@ -90,6 +90,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-31T20:23:40.991Z
-Stopped at: Completed 03-01-PLAN.md
+Last session: 2026-03-31T20:21:42.091Z
+Stopped at: Completed 03-02-PLAN.md
 Resume file: None
