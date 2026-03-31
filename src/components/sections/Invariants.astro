@@ -1,0 +1,68 @@
+---
+import Section from '../ui/Section.astro';
+import Equation from '../math/Equation.astro';
+import {
+  COMPOSITION_ERROR,
+  COMPRESSION_EFFICIENCY,
+  SUBALGEBRA_CLEANLINESS,
+  PREDICTION_CONSISTENCY,
+  ASSOCIATOR_HEALTH,
+} from '../../data/equations';
+---
+
+<Section id="invariants" class="border-t border-sigil-dim/20">
+  <h2 class="font-display text-2xl sm:text-3xl text-sigil mb-12 tracking-wider uppercase">
+    Invariants
+  </h2>
+
+  <p class="text-chalk leading-relaxed mb-12">
+    The octonionic trie monitors its own structural health through five invariants derived from the algebra. These invariants replace the role of loss functions in gradient-trained systems. Each produces a scalar signal without labeled data or external supervision.
+  </p>
+
+  <div class="space-y-12">
+    <!-- Invariant 1: Composition error bound -->
+    <div>
+      <h3 class="font-display text-lg text-sigil mb-3">Composition error bound</h3>
+      <p class="text-chalk leading-relaxed mb-4">
+        Sequential octonionic multiplication accumulates floating-point error. The composition error bound tracks this accumulation at each depth level. When the error exceeds a threshold, the node stops accepting new children, establishing a natural resolution limit per branch.
+      </p>
+      <Equation latex={COMPOSITION_ERROR} label="2" ariaLabel="Composition error: epsilon of d equals the absolute value of x inverse times the quantity o times x, minus o, divided by the absolute value of o" />
+    </div>
+
+    <!-- Invariant 2: Compression efficiency -->
+    <div>
+      <h3 class="font-display text-lg text-sigil mb-3">Compression efficiency</h3>
+      <p class="text-chalk leading-relaxed mb-4">
+        The trie evaluates whether a subtree's structural complexity is justified by its contribution to prediction quality. A high ratio of nodes to effective capacity signals redundancy. Subtrees that consume structure without improving predictions are candidates for consolidation through sibling absorption.
+      </p>
+      <Equation latex={COMPRESSION_EFFICIENCY} label="3" ariaLabel="Compression efficiency: rho equals the number of nodes divided by the effective prediction capacity" />
+    </div>
+
+    <!-- Invariant 3: Subalgebra cleanliness -->
+    <div>
+      <h3 class="font-display text-lg text-sigil mb-3">Subalgebra cleanliness</h3>
+      <p class="text-chalk leading-relaxed mb-4">
+        At each internal node, the pairwise associators between children measure how distinct their occupied subalgebras are. High cleanliness means the branches represent genuinely different algebraic directions. Low cleanliness suggests two children are too similar and should be merged.
+      </p>
+      <Equation latex={SUBALGEBRA_CLEANLINESS} label="4" ariaLabel="Subalgebra cleanliness of node n equals the minimum over i not equal to j of the absolute value of the associator of c_i, c_j, and n" />
+    </div>
+
+    <!-- Invariant 4: Prediction consistency -->
+    <div>
+      <h3 class="font-display text-lg text-sigil mb-3">Prediction consistency</h3>
+      <p class="text-chalk leading-relaxed mb-4">
+        Before committing an update, the trie estimates how the change would have affected prior predictions stored in the node's memory buffer. The maximum discrepancy across all buffered predictions determines whether the update proceeds. Persistently high discrepancy indicates that the node is attempting to represent fundamentally incompatible information.
+      </p>
+      <Equation latex={PREDICTION_CONSISTENCY} label="5" ariaLabel="Prediction consistency: delta of n equals the maximum over y in the buffer of the absolute difference between counterfactual and original predictions" />
+    </div>
+
+    <!-- Invariant 5: Associator health -->
+    <div>
+      <h3 class="font-display text-lg text-sigil mb-3">Associator health</h3>
+      <p class="text-chalk leading-relaxed mb-4">
+        The mean associator norm at each node, averaged over recent inputs, measures how well the routing structure accommodates incoming data. A persistently high value signals that the node's children are not organizing data effectively and that restructuring may be needed.
+      </p>
+      <Equation latex={ASSOCIATOR_HEALTH} label="6" ariaLabel="Associator health: alpha of n equals one over K times the sum from k equals 1 to K of the absolute value of the associator of x_k, c_k star, and n" />
+    </div>
+  </div>
+</Section>
