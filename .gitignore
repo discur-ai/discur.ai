@@ -19,3 +19,8 @@ Thumbs.db
 *.swp
 *.swo
 *~
+.claude
+
+# Playwright/browser testing artifacts
+*.png
+.playwright-mcp/
