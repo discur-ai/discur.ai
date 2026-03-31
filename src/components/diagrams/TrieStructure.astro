@@ -7,7 +7,7 @@ const { class: className } = Astro.props;
 ---
 
 <svg
-  viewBox="0 0 800 400"
+  viewBox="0 0 500 320"
   xmlns="http://www.w3.org/2000/svg"
   class:list={[className]}
   preserveAspectRatio="xMidYMid meet"
@@ -15,53 +15,39 @@ const { class: className } = Astro.props;
   aria-label="Octonionic trie structure showing three levels of hierarchical memory nodes"
 >
   <defs>
-    <filter id="trie-glow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur in="SourceAlpha" stdDeviation="4" result="blur"/>
-      <feColorMatrix in="blur" type="matrix" result="coloredBlur"
-        values="0.77 0 0 0 0
-                0.64 0 0 0 0
-                0.35 0 0 0 0
-                0    0 0 0.6 0"/>
+    <filter id="trie-glow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur"/>
       <feMerge>
-        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="blur"/>
         <feMergeNode in="SourceGraphic"/>
       </feMerge>
     </filter>
   </defs>
 
-  <!-- Edges (drawn first, behind labels and nodes) -->
-  <!-- o_root -> o_1 -->
-  <line x1="400" y1="60" x2="160" y2="190" stroke="#A87424" stroke-width="1.5" data-trie-edge/>
-  <!-- o_root -> o_2 -->
-  <line x1="400" y1="60" x2="400" y2="190" stroke="#A87424" stroke-width="1.5" data-trie-edge/>
-  <!-- o_root -> o_3 -->
-  <line x1="400" y1="60" x2="640" y2="190" stroke="#A87424" stroke-width="1.5" data-trie-edge/>
-  <!-- o_1 -> o_11 -->
-  <line x1="160" y1="190" x2="80" y2="330" stroke="#A87424" stroke-width="1.5" data-trie-edge/>
-  <!-- o_1 -> o_12 -->
-  <line x1="160" y1="190" x2="240" y2="330" stroke="#A87424" stroke-width="1.5" data-trie-edge/>
-  <!-- o_3 -> o_31 -->
-  <line x1="640" y1="190" x2="640" y2="330" stroke="#A87424" stroke-width="1.5" data-trie-edge/>
+  <!-- Edges -->
+  <line x1="250" y1="50" x2="100" y2="150" stroke="#C4A35A" stroke-width="1.5" opacity="0.6" data-trie-edge/>
+  <line x1="250" y1="50" x2="250" y2="150" stroke="#C4A35A" stroke-width="1.5" opacity="0.6" data-trie-edge/>
+  <line x1="250" y1="50" x2="400" y2="150" stroke="#C4A35A" stroke-width="1.5" opacity="0.6" data-trie-edge/>
+  <line x1="100" y1="150" x2="50" y2="260" stroke="#C4A35A" stroke-width="1.5" opacity="0.6" data-trie-edge/>
+  <line x1="100" y1="150" x2="150" y2="260" stroke="#C4A35A" stroke-width="1.5" opacity="0.6" data-trie-edge/>
+  <line x1="400" y1="150" x2="400" y2="260" stroke="#C4A35A" stroke-width="1.5" opacity="0.6" data-trie-edge/>
 
-  <!-- Edge labels (positioned at midpoints with offsets) -->
-  <text x="265" y="125" fill="#C4A35A" font-family="Cinzel, serif" font-size="14" text-anchor="middle" data-trie-label>S&#x2081;</text>
-  <text x="415" y="125" fill="#C4A35A" font-family="Cinzel, serif" font-size="14" text-anchor="middle" data-trie-label>S&#x2083;</text>
-  <text x="535" y="125" fill="#C4A35A" font-family="Cinzel, serif" font-size="14" text-anchor="middle" data-trie-label>S&#x2086;</text>
-  <text x="105" y="260" fill="#C4A35A" font-family="Cinzel, serif" font-size="14" text-anchor="middle" data-trie-label>S&#x2082;</text>
-  <text x="215" y="260" fill="#C4A35A" font-family="Cinzel, serif" font-size="14" text-anchor="middle" data-trie-label>S&#x2084;</text>
-  <text x="655" y="260" fill="#C4A35A" font-family="Cinzel, serif" font-size="14" text-anchor="middle" data-trie-label>S&#x2087;</text>
+  <!-- Edge labels -->
+  <text x="165" y="90" fill="#C4A35A" font-family="serif" font-size="13" text-anchor="middle" opacity="0.7" data-trie-label>S&#x2081;</text>
+  <text x="260" y="90" fill="#C4A35A" font-family="serif" font-size="13" text-anchor="middle" opacity="0.7" data-trie-label>S&#x2083;</text>
+  <text x="335" y="90" fill="#C4A35A" font-family="serif" font-size="13" text-anchor="middle" opacity="0.7" data-trie-label>S&#x2086;</text>
+  <text x="65" y="210" fill="#C4A35A" font-family="serif" font-size="13" text-anchor="middle" opacity="0.7" data-trie-label>S&#x2082;</text>
+  <text x="138" y="210" fill="#C4A35A" font-family="serif" font-size="13" text-anchor="middle" opacity="0.7" data-trie-label>S&#x2084;</text>
+  <text x="412" y="210" fill="#C4A35A" font-family="serif" font-size="13" text-anchor="middle" opacity="0.7" data-trie-label>S&#x2087;</text>
 
-  <!-- Node circles with glow filter -->
-  <!-- Level 0: root (radius 12) -->
-  <circle cx="400" cy="60" r="12" fill="#C4A35A" filter="url(#trie-glow)" data-trie-node="level-0"/>
-
-  <!-- Level 1: children (radius 10) -->
-  <circle cx="160" cy="190" r="10" fill="#C4A35A" filter="url(#trie-glow)" data-trie-node="level-1"/>
-  <circle cx="400" cy="190" r="10" fill="#C4A35A" filter="url(#trie-glow)" data-trie-node="level-1"/>
-  <circle cx="640" cy="190" r="10" fill="#C4A35A" filter="url(#trie-glow)" data-trie-node="level-1"/>
-
-  <!-- Level 2: grandchildren (radius 8) -->
-  <circle cx="80" cy="330" r="8" fill="#C4A35A" filter="url(#trie-glow)" data-trie-node="level-2"/>
-  <circle cx="240" cy="330" r="8" fill="#C4A35A" filter="url(#trie-glow)" data-trie-node="level-2"/>
-  <circle cx="640" cy="330" r="8" fill="#C4A35A" filter="url(#trie-glow)" data-trie-node="level-2"/>
+  <!-- Level 0: root -->
+  <circle cx="250" cy="50" r="12" fill="#E8D5A3" filter="url(#trie-glow)" data-trie-node="level-0"/>
+  <!-- Level 1: children -->
+  <circle cx="100" cy="150" r="10" fill="#D4AF37" filter="url(#trie-glow)" data-trie-node="level-1"/>
+  <circle cx="250" cy="150" r="10" fill="#D4AF37" filter="url(#trie-glow)" data-trie-node="level-1"/>
+  <circle cx="400" cy="150" r="10" fill="#D4AF37" filter="url(#trie-glow)" data-trie-node="level-1"/>
+  <!-- Level 2: grandchildren -->
+  <circle cx="50" cy="260" r="8" fill="#C4A35A" filter="url(#trie-glow)" data-trie-node="level-2"/>
+  <circle cx="150" cy="260" r="8" fill="#C4A35A" filter="url(#trie-glow)" data-trie-node="level-2"/>
+  <circle cx="400" cy="260" r="8" fill="#C4A35A" filter="url(#trie-glow)" data-trie-node="level-2"/>
 </svg>
