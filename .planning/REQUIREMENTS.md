@@ -31,9 +31,9 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Visual Design
 
-- [ ] **VISL-01**: Esoteric/occult aesthetic expressed through mathematical content itself, not excessive decoration
-- [ ] **VISL-02**: Section transitions use scroll-triggered reveals (GSAP)
-- [ ] **VISL-03**: Fano plane diagram animates on scroll (draw-on effect or subalgebra highlighting)
+- [x] **VISL-01**: Esoteric/occult aesthetic expressed through mathematical content itself, not excessive decoration
+- [x] **VISL-02**: Section transitions use scroll-triggered reveals (GSAP)
+- [x] **VISL-03**: Fano plane diagram animates on scroll (draw-on effect or subalgebra highlighting)
 - [ ] **VISL-04**: Sacred geometry or mathematical dividers between sections (max 2 decorative non-mathematical elements)
 - [ ] **VISL-05**: Page functions fully without JavaScript (progressive enhancement)
 
@@ -95,9 +95,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | CONT-08 | Phase 2 | Complete |
 | CONT-09 | Phase 2 | Complete |
 | CONT-10 | Phase 2 | Complete |
-| VISL-01 | Phase 3 | Pending |
-| VISL-02 | Phase 3 | Pending |
-| VISL-03 | Phase 3 | Pending |
+| VISL-01 | Phase 3 | Complete |
+| VISL-02 | Phase 3 | Complete |
+| VISL-03 | Phase 3 | Complete |
 | VISL-04 | Phase 3 | Pending |
 | VISL-05 | Phase 3 | Pending |
 | DEPL-01 | Phase 4 | Pending |
