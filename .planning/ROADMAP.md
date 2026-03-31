@@ -52,10 +52,10 @@ Plans:
 **Plans**: 5 plans
 
 Plans:
-- [ ] 02-01-PLAN.md -- Fix equation constants and create results/comparison data files
+- [x] 02-01-PLAN.md -- Fix equation constants and create results/comparison data files
 - [x] 02-02-PLAN.md -- Hand-coded SVG diagrams (Fano plane sigil and octonionic trie structure)
 - [ ] 02-03-PLAN.md -- Hero, Mechanism, and Architecture section components with pre-written copy
-- [ ] 02-04-PLAN.md -- Invariants, Results, Comparison, and Contact section components with pre-written copy
+- [x] 02-04-PLAN.md -- Invariants, Results, Comparison, and Contact section components with pre-written copy
 - [ ] 02-05-PLAN.md -- Assemble index.astro and update Footer with correct contact info
 
 **UI hint**: yes
