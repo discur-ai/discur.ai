@@ -21,6 +21,9 @@ Clearly communicate what the octonionic trie is and why it matters, through the 
 - ✓ Fano plane SVG (esoteric sigil) and octonionic trie diagram — Phase 2
 - ✓ Experimental results and comparison table — Phase 2
 - ✓ Anti-slop compliant copy (direct technical voice) — Phase 2
+- ✓ GSAP scroll animations and Fano plane draw-on — Phase 3
+- ✓ Progressive enhancement (full content without JS) — Phase 3
+- ✓ Decorative elements (triple-dot dividers + constellation background) — Phase 3
 
 ### Active
 
@@ -101,4 +104,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-03-31 after Phase 2 completion*
+*Last updated: 2026-03-31 after Phase 3 completion*
