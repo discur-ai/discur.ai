@@ -18,16 +18,16 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Content
 
-- [ ] **CONT-01**: Hero section states what Discur builds in one clear sentence
-- [ ] **CONT-02**: Core technology section explains the octonionic trie with rendered equations ([a,b,c] = (ab)c - a(bc), composition error bound, associator norm)
-- [ ] **CONT-03**: Five mechanisms section presents routing, novelty detection, content update, consistency verification, and structural health as consequences of octonionic algebra
+- [x] **CONT-01**: Hero section states what Discur builds in one clear sentence
+- [x] **CONT-02**: Core technology section explains the octonionic trie with rendered equations ([a,b,c] = (ab)c - a(bc), composition error bound, associator norm)
+- [x] **CONT-03**: Five mechanisms section presents routing, novelty detection, content update, consistency verification, and structural health as consequences of octonionic algebra
 - [x] **CONT-04**: Fano plane diagram rendered as SVG with labeled points and color-coded subalgebras
 - [x] **CONT-05**: Octonionic trie structure diagram showing nodes, edges, and subalgebra labels
 - [ ] **CONT-06**: Results section presents experimental evidence with specific numbers (95.2% MNIST, 0% catastrophic forgetting, 97.7% synthetic, 5x novelty contrast)
 - [ ] **CONT-07**: Comparison table contrasts Oct-Trie vs NTM/DNC, SDM, HTM across memory structure, routing, update rule, consistency check, training, pruning, self-monitoring
 - [ ] **CONT-08**: Link to research paper (PDF download or external link)
 - [ ] **CONT-09**: Contact section with email or other contact method
-- [ ] **CONT-10**: All copy passes anti-slop checklist (no "this isn't X, it's Y", no staccato fragments, no binary contrasts, no manufactured excitement, no unearned superlatives)
+- [x] **CONT-10**: All copy passes anti-slop checklist (no "this isn't X, it's Y", no staccato fragments, no binary contrasts, no manufactured excitement, no unearned superlatives)
 
 ### Visual Design
 
@@ -85,16 +85,16 @@ Which phases cover which requirements. Updated during roadmap creation.
 | FOUN-04 | Phase 1 | Complete |
 | FOUN-05 | Phase 1 | Complete |
 | FOUN-06 | Phase 1 | Complete |
-| CONT-01 | Phase 2 | Pending |
-| CONT-02 | Phase 2 | Pending |
-| CONT-03 | Phase 2 | Pending |
+| CONT-01 | Phase 2 | Complete |
+| CONT-02 | Phase 2 | Complete |
+| CONT-03 | Phase 2 | Complete |
 | CONT-04 | Phase 2 | Complete |
 | CONT-05 | Phase 2 | Complete |
 | CONT-06 | Phase 2 | Pending |
 | CONT-07 | Phase 2 | Pending |
 | CONT-08 | Phase 2 | Pending |
 | CONT-09 | Phase 2 | Pending |
-| CONT-10 | Phase 2 | Pending |
+| CONT-10 | Phase 2 | Complete |
 | VISL-01 | Phase 3 | Pending |
 | VISL-02 | Phase 3 | Pending |
 | VISL-03 | Phase 3 | Pending |
