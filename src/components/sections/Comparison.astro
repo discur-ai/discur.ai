@@ -3,7 +3,7 @@ import Section from '../ui/Section.astro';
 import { COMPARISON_ROWS, ARCHITECTURE_NAMES } from '../../data/comparisons';
 ---
 
-<Section id="comparison" class="border-t border-sigil-dim/20">
+<Section id="comparison" dataAnimate="comparison">
   <h2 class="font-display text-2xl sm:text-3xl text-sigil mb-12 tracking-wider uppercase">
     Comparison
   </h2>
@@ -33,7 +33,7 @@ import { COMPARISON_ROWS, ARCHITECTURE_NAMES } from '../../data/comparisons';
       </thead>
       <tbody class="divide-y divide-sigil-dim/20">
         {COMPARISON_ROWS.map((row) => (
-          <tr>
+          <tr data-comparison-row>
             <td class="px-4 py-3 text-sm text-chalk-muted font-display">{row.property}</td>
             <td class="px-4 py-3 text-sm text-chalk">{row.ntmDnc}</td>
             <td class="px-4 py-3 text-sm text-chalk">{row.sdm}</td>

@@ -3,7 +3,7 @@ import Section from '../ui/Section.astro';
 import { MNIST_RESULTS, STABILITY_RESULTS, NOVELTY_RESULTS } from '../../data/results';
 ---
 
-<Section id="results" class="border-t border-sigil-dim/20">
+<Section id="results" dataAnimate="results">
   <h2 class="font-display text-2xl sm:text-3xl text-sigil mb-12 tracking-wider uppercase">
     Results
   </h2>
@@ -18,17 +18,17 @@ import { MNIST_RESULTS, STABILITY_RESULTS, NOVELTY_RESULTS } from '../../data/re
         </tr>
       </thead>
       <tbody class="divide-y divide-sigil-dim/20">
-        <tr>
+        <tr data-result-row>
           <td class="px-4 py-3 text-sm text-chalk">MNIST Classification</td>
           <td class="px-4 py-3 text-sm text-glyph">{MNIST_RESULTS.headline.accuracy}%</td>
           <td class="px-4 py-3 text-sm text-chalk">CNN encoder, 60,000 training samples. Within {Math.abs(MNIST_RESULTS.gap)} percentage points of k-nearest neighbors on the same features.</td>
         </tr>
-        <tr>
+        <tr data-result-row>
           <td class="px-4 py-3 text-sm text-chalk">Stability-Plasticity</td>
           <td class="px-4 py-3 text-sm text-glyph">{STABILITY_RESULTS.catastrophicForgetting}% forgetting</td>
           <td class="px-4 py-3 text-sm text-chalk">{STABILITY_RESULTS.overallAccuracy}% overall accuracy across {STABILITY_RESULTS.categories} sequential categories ({STABILITY_RESULTS.correctTestSamples}/{STABILITY_RESULTS.totalTestSamples} test samples).</td>
         </tr>
-        <tr>
+        <tr data-result-row>
           <td class="px-4 py-3 text-sm text-chalk">Novelty Detection</td>
           <td class="px-4 py-3 text-sm text-glyph">{NOVELTY_RESULTS.spikeRatioDisplay} spike ratio</td>
           <td class="px-4 py-3 text-sm text-chalk">Associator norm at category transitions vs. within-category baseline. All transitions exceed the {NOVELTY_RESULTS.percentileExceeded}th percentile of within-category norms.</td>

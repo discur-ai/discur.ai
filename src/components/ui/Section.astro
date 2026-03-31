@@ -3,9 +3,10 @@ interface Props {
   id?: string;
   class?: string;
   fullWidth?: boolean;
+  dataAnimate?: string;
 }
 
-const { id, class: className, fullWidth = false } = Astro.props;
+const { id, class: className, fullWidth = false, dataAnimate } = Astro.props;
 ---
 
 <section
@@ -15,6 +16,7 @@ const { id, class: className, fullWidth = false } = Astro.props;
     !fullWidth && 'mx-auto max-w-4xl',
     className,
   ]}
+  data-animate={dataAnimate}
 >
   <slot />
 </section>
