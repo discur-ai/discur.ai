@@ -102,11 +102,13 @@
       }
 
       // Trie growth: smooth sequential with overlapping steps
+      // Labels now have data-trie-seq matching their edge, so they appear together
       const trieElements = gsap.utils.toArray("[data-trie-seq]");
       if (trieElements.length) {
         const trieEdges = gsap.utils.toArray("[data-trie-edge]");
         gsap.set(trieEdges, { drawSVG: "0%", opacity: 0 });
 
+        // Sort by seq number; elements with the same seq (edge + its label) appear together
         trieElements.sort((a: Element, b: Element) =>
           Number(a.getAttribute("data-trie-seq")) - Number(b.getAttribute("data-trie-seq"))
         );
@@ -119,28 +121,40 @@
         let t = 0;
         const nodeDur = 0.4;
         const edgeDur = 0.5;
+        const labelDur = 0.4;
         const gap = 0.2;
+        let lastSeq = -1;
 
         for (const el of trieElements) {
+          const seq = Number(el.getAttribute("data-trie-seq"));
           const isEdge = el.hasAttribute("data-trie-edge");
+          const isLabel = el.hasAttribute("data-trie-label");
+
+          // Only advance time for new seq numbers (edge+label share a seq)
+          if (seq !== lastSeq) {
+            if (lastSeq >= 0) t += gap;
+            lastSeq = seq;
+          }
+
           if (isEdge) {
             trieTl.to(el, {
               drawSVG: "100%", opacity: 1,
               duration: edgeDur, ease: "power2.inOut",
             }, `trie+=${t}`);
+          } else if (isLabel) {
+            // Label fades in slightly after its edge starts
+            trieTl.to(el, {
+              opacity: 0.8,
+              duration: labelDur, ease: "power2.out",
+            }, `trie+=${t + 0.15}`);
           } else {
+            // Node
             trieTl.to(el, {
               opacity: 1,
               duration: nodeDur, ease: "power2.out",
             }, `trie+=${t}`);
           }
-          t += gap;
         }
-
-        // Labels fade in smoothly after tree finishes
-        trieTl.to("[data-trie-label]", {
-          opacity: 1, duration: 0.6, ease: "power2.out", stagger: 0.1,
-        }, `trie+=${t + 0.2}`);
       }
     }
 
