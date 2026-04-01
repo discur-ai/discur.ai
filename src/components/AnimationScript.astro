@@ -113,9 +113,14 @@
           Number(a.getAttribute("data-trie-seq")) - Number(b.getAttribute("data-trie-seq"))
         );
 
+        // Trigger when the bottom of the trie is visible (bottom of trie hits bottom of viewport)
+        const trieSvg = document.querySelector('[aria-label*="trie"]');
         const trieTl = gsap.timeline({
-          scrollTrigger: { trigger: archSection, start: "top 75%", once: true },
-          delay: 0.6,
+          scrollTrigger: {
+            trigger: trieSvg || archSection,
+            start: "bottom bottom",
+            once: true,
+          },
         });
 
         let t = 0;
