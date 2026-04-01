@@ -182,41 +182,8 @@
       }
     }
 
-    // ========================================
-    // 6. CONSTELLATION BACKGROUND ANIMATION
-    // ========================================
-    const constellationPoints = document.querySelectorAll("[data-constellation-point]");
-    if (constellationPoints.length) {
-      constellationPoints.forEach((point) => {
-        const cx = Number(point.getAttribute("cx"));
-        const cy = Number(point.getAttribute("cy"));
-        // Each point drifts in a small random orbit
-        gsap.to(point, {
-          attr: {
-            cx: cx + (Math.random() - 0.5) * 40,
-            cy: cy + (Math.random() - 0.5) * 30,
-          },
-          duration: 8 + Math.random() * 6,
-          ease: "sine.inOut",
-          repeat: -1,
-          yoyo: true,
-        });
-      });
-    }
-
-    const constellationLines = document.querySelectorAll("[data-constellation-line]");
-    if (constellationLines.length) {
-      constellationLines.forEach((line) => {
-        // Lines follow their connected points (update happens via GSAP ticker)
-        gsap.to(line, {
-          opacity: 0.04,
-          duration: 4 + Math.random() * 4,
-          ease: "sine.inOut",
-          repeat: -1,
-          yoyo: true,
-        });
-      });
-    }
+    // Constellation animation is handled by CSS keyframes (no JS needed)
+    // This avoids per-frame DOM writes that cause scroll jitter
 
   }); // end matchMedia
 </script>
