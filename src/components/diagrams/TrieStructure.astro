@@ -4,6 +4,16 @@ interface Props {
 }
 
 const { class: className } = Astro.props;
+
+// Edge definitions: from → to, with label positioned at midpoint + offset
+const edges = [
+  { x1: 250, y1: 50, x2: 100, y2: 150, label: "S\u2081", seq: 2, lx: -15, ly: -5 },
+  { x1: 250, y1: 50, x2: 250, y2: 150, label: "S\u2083", seq: 4, lx: 12, ly: 0 },
+  { x1: 250, y1: 50, x2: 400, y2: 150, label: "S\u2086", seq: 6, lx: 15, ly: -5 },
+  { x1: 100, y1: 150, x2: 50, y2: 260, label: "S\u2082", seq: 8, lx: -15, ly: 0 },
+  { x1: 100, y1: 150, x2: 150, y2: 260, label: "S\u2084", seq: 10, lx: 15, ly: 0 },
+  { x1: 400, y1: 150, x2: 400, y2: 260, label: "S\u2087", seq: 12, lx: 15, ly: 0 },
+];
 ---
 
 <svg
@@ -24,32 +34,30 @@ const { class: className } = Astro.props;
     </filter>
   </defs>
 
-  <!-- Edges: draw sequentially as tree "grows" -->
-  <!-- Level 0 to Level 1 edges -->
-  <line x1="250" y1="50" x2="100" y2="150" stroke="#8B6914" stroke-width="1.5" data-trie-edge data-trie-seq="2" pathLength="1"/>
-  <line x1="250" y1="50" x2="250" y2="150" stroke="#8B6914" stroke-width="1.5" data-trie-edge data-trie-seq="4" pathLength="1"/>
-  <line x1="250" y1="50" x2="400" y2="150" stroke="#8B6914" stroke-width="1.5" data-trie-edge data-trie-seq="6" pathLength="1"/>
-  <!-- Level 1 to Level 2 edges -->
-  <line x1="100" y1="150" x2="50" y2="260" stroke="#A68930" stroke-width="1.5" data-trie-edge data-trie-seq="8" pathLength="1"/>
-  <line x1="100" y1="150" x2="150" y2="260" stroke="#A68930" stroke-width="1.5" data-trie-edge data-trie-seq="10" pathLength="1"/>
-  <line x1="400" y1="150" x2="400" y2="260" stroke="#A68930" stroke-width="1.5" data-trie-edge data-trie-seq="12" pathLength="1"/>
+  {/* Edges with labels at their midpoints */}
+  {edges.map(e => {
+    const mx = (e.x1 + e.x2) / 2 + e.lx;
+    const my = (e.y1 + e.y2) / 2 + e.ly;
+    return (
+      <>
+        <line x1={e.x1} y1={e.y1} x2={e.x2} y2={e.y2}
+          stroke="#8B6914" stroke-width="1.5"
+          data-trie-edge data-trie-seq={e.seq} pathLength="1"/>
+        <text x={mx} y={my} fill="#8B6914" font-family="serif" font-size="12"
+          text-anchor="middle" dominant-baseline="middle"
+          data-trie-label>{e.label}</text>
+      </>
+    );
+  })}
 
-  <!-- Edge labels -->
-  <text x="165" y="90" fill="#8B6914" font-family="serif" font-size="13" text-anchor="middle" data-trie-label>S&#x2081;</text>
-  <text x="260" y="90" fill="#8B6914" font-family="serif" font-size="13" text-anchor="middle" data-trie-label>S&#x2083;</text>
-  <text x="335" y="90" fill="#8B6914" font-family="serif" font-size="13" text-anchor="middle" data-trie-label>S&#x2086;</text>
-  <text x="65" y="210" fill="#A68930" font-family="serif" font-size="13" text-anchor="middle" data-trie-label>S&#x2082;</text>
-  <text x="138" y="210" fill="#A68930" font-family="serif" font-size="13" text-anchor="middle" data-trie-label>S&#x2084;</text>
-  <text x="412" y="210" fill="#A68930" font-family="serif" font-size="13" text-anchor="middle" data-trie-label>S&#x2087;</text>
-
-  <!-- Nodes: appear at each level as tree grows -->
-  <!-- seq 1: root appears first -->
+  {/* Nodes: appear in growth sequence */}
+  {/* Level 0: root */}
   <circle cx="250" cy="50" r="12" fill="#8B6914" filter="url(#trie-glow)" data-trie-node="level-0" data-trie-seq="1"/>
-  <!-- seq 3,5,7: children appear after their edge draws -->
+  {/* Level 1: children */}
   <circle cx="100" cy="150" r="10" fill="#A68930" filter="url(#trie-glow)" data-trie-node="level-1" data-trie-seq="3"/>
   <circle cx="250" cy="150" r="10" fill="#A68930" filter="url(#trie-glow)" data-trie-node="level-1" data-trie-seq="5"/>
   <circle cx="400" cy="150" r="10" fill="#A68930" filter="url(#trie-glow)" data-trie-node="level-1" data-trie-seq="7"/>
-  <!-- seq 9,11,13: grandchildren appear after their edge draws -->
+  {/* Level 2: grandchildren */}
   <circle cx="50" cy="260" r="8" fill="#7A5C12" filter="url(#trie-glow)" data-trie-node="level-2" data-trie-seq="9"/>
   <circle cx="150" cy="260" r="8" fill="#7A5C12" filter="url(#trie-glow)" data-trie-node="level-2" data-trie-seq="11"/>
   <circle cx="400" cy="260" r="8" fill="#7A5C12" filter="url(#trie-glow)" data-trie-node="level-2" data-trie-seq="13"/>
