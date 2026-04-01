@@ -20,7 +20,7 @@
   --color-chalk: #2A2A35;       /* deep ink for body text */
   --color-chalk-muted: #6B6660; /* muted ink for secondary text */
   --color-glyph: #5C3D2E;       /* deep burgundy-brown for display headings */
-  --spacing-section: clamp(4rem, 10vw, 10rem);
+  --spacing-section: clamp(4rem, 4vw, 10rem);
 }
 
 html {
