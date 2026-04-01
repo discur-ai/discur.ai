@@ -12,17 +12,17 @@ import { COMPARISON_ROWS, ARCHITECTURE_NAMES } from '../../data/comparisons';
     The octonionic trie shares individual features with existing memory-augmented architectures but combines them through a single algebraic substrate rather than independent engineered components.
   </p>
 
-  <div class="overflow-x-auto overflow-y-hidden rounded-lg border border-sigil-dim/30">
+  <div class="overflow-x-auto overflow-y-hidden rounded-lg border border-onyx">
     <table class="w-full text-left text-sm">
       <thead>
-        <tr class="border-b border-sigil-dim/30 bg-obsidian">
+        <tr class="border-b border-onyx bg-obsidian">
           <th class="px-4 py-3 font-display text-sm text-chalk-muted tracking-wider uppercase"></th>
           {ARCHITECTURE_NAMES.map((name, i) => (
             <th
               class:list={[
                 'px-4 py-3 font-display text-sm tracking-wider',
                 i === ARCHITECTURE_NAMES.length - 1
-                  ? 'text-sigil border-l border-sigil-dim/30 bg-sigil/5'
+                  ? 'text-sigil border-l border-onyx bg-sigil/10'
                   : 'text-chalk-muted',
               ]}
             >
@@ -31,14 +31,14 @@ import { COMPARISON_ROWS, ARCHITECTURE_NAMES } from '../../data/comparisons';
           ))}
         </tr>
       </thead>
-      <tbody class="divide-y divide-sigil-dim/20">
+      <tbody class="divide-y divide-onyx">
         {COMPARISON_ROWS.map((row) => (
           <tr data-comparison-row>
             <td class="px-4 py-3 text-sm text-chalk-muted font-display">{row.property}</td>
             <td class="px-4 py-3 text-sm text-chalk">{row.ntmDnc}</td>
             <td class="px-4 py-3 text-sm text-chalk">{row.sdm}</td>
             <td class="px-4 py-3 text-sm text-chalk">{row.htm}</td>
-            <td class="px-4 py-3 text-sm text-sigil border-l border-sigil-dim/30 bg-sigil/5">{row.octTrie}</td>
+            <td class="px-4 py-3 text-sm text-sigil border-l border-onyx bg-sigil/10">{row.octTrie}</td>
           </tr>
         ))}
       </tbody>

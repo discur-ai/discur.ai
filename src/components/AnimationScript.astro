@@ -11,83 +11,77 @@
 
   gsap.registerPlugin(ScrollTrigger, DrawSVGPlugin);
 
-  // Wrap ALL animations in matchMedia for reduced-motion support.
-  // If user prefers reduced motion, none of this code runs.
-  // gsap.matchMedia auto-reverts everything if preference changes.
   const mm = gsap.matchMedia();
 
   mm.add("(prefers-reduced-motion: no-preference)", () => {
 
     // ========================================
-    // 1. HERO LOAD ANIMATION (D-05, D-08, D-09, D-10, D-11)
+    // 1. HERO LOAD ANIMATION
     // ========================================
-    // Plays once on page load. Not scroll-triggered.
-    // Sequence: headline > paragraph > Fano lines draw > nodes scale > subalgebra glow
+    // Sequence: headline > paragraph > Fano plane (point-line-point-line...)
 
-    const heroTl = gsap.timeline({ delay: 0.1 });
+    const heroTl = gsap.timeline({ delay: 0.2 });
 
-    // Step 1: Headline fade up (0.5s, power2.out)
+    // Headline fade up
     heroTl.to("[data-hero-headline]", {
       opacity: 1,
       y: 0,
-      duration: 0.5,
+      duration: 0.6,
       ease: "power2.out",
     });
 
-    // Step 2: Paragraph fade up (0.5s, overlaps headline by 0.2s)
+    // Paragraph fade up
     heroTl.to("[data-hero-paragraph]", {
       opacity: 1,
       y: 0,
-      duration: 0.5,
+      duration: 0.6,
       ease: "power2.out",
-    }, "-=0.2");
+    }, "-=0.3");
 
-    // Step 3: Fano plane lines draw on + nodes fade in together
-    const fanoLines = gsap.utils.toArray("[data-fano-line]");
-    if (fanoLines.length) {
+    // Fano plane: sequential point-line-point using data-fano-seq ordering
+    // Each element animates in order: point fades in, then line draws, etc.
+    const fanoElements = gsap.utils.toArray("[data-fano-seq]");
+    if (fanoElements.length) {
+      // Hide all lines initially
+      const fanoLines = gsap.utils.toArray("[data-fano-line]");
       gsap.set(fanoLines, { drawSVG: "0%" });
-      heroTl.to(fanoLines, {
-        drawSVG: "100%",
-        duration: 2.5,
-        ease: "power1.inOut",
-        stagger: 0.2,
-      }, "+=0.5");
+
+      // Animate each element in sequence order
+      fanoElements.sort((a: Element, b: Element) => {
+        return Number(a.getAttribute("data-fano-seq")) - Number(b.getAttribute("data-fano-seq"));
+      });
+
+      let fanoOffset = "+=0.3"; // initial delay after paragraph
+      for (const el of fanoElements) {
+        const isLine = el.hasAttribute("data-fano-line");
+        if (isLine) {
+          // Lines draw on
+          heroTl.to(el, {
+            drawSVG: "100%",
+            opacity: 1,
+            duration: 0.3,
+            ease: "power1.inOut",
+          }, fanoOffset);
+        } else {
+          // Points fade in
+          heroTl.to(el, {
+            opacity: 1,
+            duration: 0.2,
+            ease: "power2.out",
+          }, fanoOffset);
+        }
+        fanoOffset = "-=0.05"; // slight overlap between elements
+      }
     }
 
-    // Nodes fade in alongside lines (overlapping, not after)
-    heroTl.to("[data-fano-node]", {
-      opacity: 1,
-      duration: 1.0,
-      ease: "power2.out",
-      stagger: 0.15,
-    }, "<0.3"); // start 0.3s after lines begin
-
-    // Step 5: Subalgebra glow pulse (opacity pulse on lines: 0.85 > 1 > 0.85)
-    // Sequential, 0.25s gap between each line for a slower, more ceremonial feel
-    heroTl.to("[data-fano-line]", {
-      opacity: 1,
-      duration: 0.25,
-      stagger: 0.25,
-      ease: "power1.inOut",
-    });
-    heroTl.to("[data-fano-line]", {
-      opacity: 0.85,
-      duration: 0.25,
-      stagger: 0.25,
-      ease: "power1.inOut",
-    });
-
     // ========================================
-    // 2. SECTION SCROLL REVEALS (D-01, D-02, D-07)
+    // 2. SECTION SCROLL REVEALS
     // ========================================
-    // Each section independently triggered at top 70%.
-    // Plays once (once: true). No replay on scroll back.
-
     gsap.utils.toArray('[data-animate="section-reveal"]').forEach((section) => {
       gsap.to(section, {
         opacity: 1,
         y: 0,
-        duration: 0.5,
+        duration: 0.6,
         ease: "power2.out",
         scrollTrigger: {
           trigger: section,
@@ -96,38 +90,36 @@
         },
       });
 
-      // Equation stagger within this section (D-03)
-      const equations = section.querySelectorAll(".katex-display");
+      // Equation stagger within this section
+      const equations = (section as Element).querySelectorAll(".katex-display");
       if (equations.length) {
         gsap.to(equations, {
           opacity: 1,
           y: 0,
-          duration: 0.4,
+          duration: 0.5,
           ease: "power2.out",
-          stagger: 0.15,
+          stagger: 0.2,
           scrollTrigger: {
             trigger: section,
             start: "top 70%",
             once: true,
           },
-          delay: 0.25,
+          delay: 0.3,
         });
       }
     });
 
     // ========================================
-    // 3. ARCHITECTURE SECTION + TRIE ANIMATION (D-06, D-12, D-13)
+    // 3. ARCHITECTURE SECTION + TRIE ANIMATION
     // ========================================
-    // Triggered by ScrollTrigger when Architecture section enters viewport.
-    // Section reveals first, then trie nodes glow in hierarchical sequence.
+    // Trie grows: root appears > edge draws > child appears > edge draws > grandchild appears...
 
     const archSection = document.querySelector('[data-animate="architecture"]');
     if (archSection) {
-      // Section reveal
       gsap.to(archSection, {
         opacity: 1,
         y: 0,
-        duration: 0.5,
+        duration: 0.6,
         ease: "power2.out",
         scrollTrigger: {
           trigger: archSection,
@@ -136,82 +128,80 @@
         },
       });
 
-      // Equation stagger within Architecture
+      // Equation stagger
       const archEquations = archSection.querySelectorAll(".katex-display");
       if (archEquations.length) {
         gsap.to(archEquations, {
           opacity: 1,
           y: 0,
-          duration: 0.4,
+          duration: 0.5,
           ease: "power2.out",
-          stagger: 0.15,
+          stagger: 0.2,
           scrollTrigger: {
             trigger: archSection,
             start: "top 70%",
             once: true,
           },
-          delay: 0.25,
+          delay: 0.3,
         });
       }
 
-      // Trie animation timeline
-      const trieTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: archSection,
-          start: "top 70%",
-          once: true,
-        },
-      });
+      // Trie: sequential node-edge-node using data-trie-seq ordering
+      const trieElements = gsap.utils.toArray("[data-trie-seq]");
+      if (trieElements.length) {
+        const trieEdges = gsap.utils.toArray("[data-trie-edge]");
+        gsap.set(trieEdges, { drawSVG: "0%" });
 
-      // Step 1: Edges fade in (0.4s)
-      trieTl.to("[data-trie-edge]", {
-        opacity: 1,
-        duration: 0.4,
-        ease: "power2.out",
-      });
+        trieElements.sort((a: Element, b: Element) => {
+          return Number(a.getAttribute("data-trie-seq")) - Number(b.getAttribute("data-trie-seq"));
+        });
 
-      // Step 2: Root node (level 0) fades in
-      trieTl.to('[data-trie-node="level-0"]', {
-        opacity: 1,
-        duration: 0.4,
-        ease: "power2.out",
-      }, "+=0.2");
+        const trieTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: archSection,
+            start: "top 70%",
+            once: true,
+          },
+          delay: 0.5, // wait for section reveal
+        });
 
-      // Step 3: Children (level 1) fade in
-      trieTl.to('[data-trie-node="level-1"]', {
-        opacity: 1,
-        duration: 0.4,
-        ease: "power2.out",
-        stagger: 0.1,
-      }, "+=0.1");
+        for (const el of trieElements) {
+          const isEdge = el.hasAttribute("data-trie-edge");
+          if (isEdge) {
+            trieTl.to(el, {
+              drawSVG: "100%",
+              opacity: 1,
+              duration: 0.35,
+              ease: "power1.inOut",
+            }, "-=0.05");
+          } else {
+            trieTl.to(el, {
+              opacity: 1,
+              duration: 0.25,
+              ease: "power2.out",
+            }, "-=0.05");
+          }
+        }
 
-      // Step 4: Grandchildren (level 2) fade in
-      trieTl.to('[data-trie-node="level-2"]', {
-        opacity: 1,
-        duration: 0.4,
-        ease: "power2.out",
-        stagger: 0.1,
-      }, "+=0.1");
-
-      // Step 5: Labels fade in (0.3s, follows last node)
-      trieTl.to("[data-trie-label]", {
-        opacity: 1,
-        duration: 0.3,
-        ease: "power2.out",
-        stagger: 0.05,
-      });
+        // Labels fade in after tree is drawn
+        trieTl.to("[data-trie-label]", {
+          opacity: 1,
+          duration: 0.4,
+          ease: "power2.out",
+          stagger: 0.08,
+        }, "+=0.1");
+      }
     }
 
     // ========================================
-    // 4. RESULTS TABLE ROW STAGGER (D-04)
+    // 4. RESULTS TABLE ROW STAGGER
     // ========================================
     const resultsSection = document.querySelector('[data-animate="results"]');
     if (resultsSection) {
-      // Section reveal
       gsap.to(resultsSection, {
         opacity: 1,
         y: 0,
-        duration: 0.5,
+        duration: 0.6,
         ease: "power2.out",
         scrollTrigger: {
           trigger: resultsSection,
@@ -220,35 +210,33 @@
         },
       });
 
-      // Row stagger (0.3s per row, 0.1s stagger, 0.2s delay after section)
       const resultRows = resultsSection.querySelectorAll("[data-result-row]");
       if (resultRows.length) {
         gsap.to(resultRows, {
           opacity: 1,
           y: 0,
-          duration: 0.3,
+          duration: 0.4,
           ease: "power2.out",
-          stagger: 0.1,
+          stagger: 0.15,
           scrollTrigger: {
             trigger: resultsSection,
             start: "top 70%",
             once: true,
           },
-          delay: 0.2,
+          delay: 0.3,
         });
       }
     }
 
     // ========================================
-    // 5. COMPARISON TABLE ROW STAGGER (D-04)
+    // 5. COMPARISON TABLE ROW STAGGER
     // ========================================
     const compSection = document.querySelector('[data-animate="comparison"]');
     if (compSection) {
-      // Section reveal
       gsap.to(compSection, {
         opacity: 1,
         y: 0,
-        duration: 0.5,
+        duration: 0.6,
         ease: "power2.out",
         scrollTrigger: {
           trigger: compSection,
@@ -257,21 +245,20 @@
         },
       });
 
-      // Row stagger
       const compRows = compSection.querySelectorAll("[data-comparison-row]");
       if (compRows.length) {
         gsap.to(compRows, {
           opacity: 1,
           y: 0,
-          duration: 0.3,
+          duration: 0.4,
           ease: "power2.out",
-          stagger: 0.1,
+          stagger: 0.15,
           scrollTrigger: {
             trigger: compSection,
             start: "top 70%",
             once: true,
           },
-          delay: 0.2,
+          delay: 0.3,
         });
       }
     }

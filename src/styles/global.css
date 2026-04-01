@@ -9,16 +9,17 @@
 }
 
 @theme {
-  --color-void: #0a0a0f;
-  --color-obsidian: #111116;
-  --color-onyx: #1a1a22;
-  --color-sigil: #c4a35a;
-  --color-sigil-dim: #7a6830;
-  --color-arcanum: #6b4c9a;
-  --color-arcanum-dim: #4a3570;
-  --color-chalk: #e0dcd4;
-  --color-chalk-muted: #8a8680;
-  --color-glyph: #e8d5a3;
+  /* Light parchment palette — illuminated manuscript on readable ground */
+  --color-void: #F5F0E8;        /* warm ivory parchment background */
+  --color-obsidian: #EDE6D8;    /* slightly darker parchment for table/code bg */
+  --color-onyx: #E5DDD0;        /* deeper parchment for borders, dividers */
+  --color-sigil: #8B6914;       /* aged gold accent — works on light bg */
+  --color-sigil-dim: #A68930;   /* lighter gold for subtle accents */
+  --color-arcanum: #6B4C9A;     /* purple accent — keeps esoteric feel */
+  --color-arcanum-dim: #8A6DB5; /* lighter purple */
+  --color-chalk: #2A2A35;       /* deep ink for body text */
+  --color-chalk-muted: #6B6660; /* muted ink for secondary text */
+  --color-glyph: #5C3D2E;       /* deep burgundy-brown for display headings */
   --spacing-section: clamp(4rem, 10vw, 10rem);
 }
 
@@ -30,6 +31,7 @@ body {
   background-color: var(--color-void);
   color: var(--color-chalk);
   font-family: var(--font-body);
+  font-size: 18px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -56,7 +58,7 @@ body {
 }
 
 .js-animate [data-fano-line] {
-  opacity: 0.85;
+  opacity: 0;
 }
 
 .js-animate [data-trie-node] {
@@ -64,7 +66,7 @@ body {
 }
 
 .js-animate [data-trie-edge] {
-  opacity: 0.3;
+  opacity: 0;
 }
 
 .js-animate [data-trie-label] {
